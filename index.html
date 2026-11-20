@@ -446,7 +446,7 @@ for ( int i = 0; i < ${MAXP}; i ++ ) {
 #pragma unroll_loop_end`);};
   return m;}
 
-const figures={},files={m:'media/man.glb?v=2',f:'media/woman.glb?v=2'};   // bump v when a model changes, so browsers don't show a cached one
+const figures={},files={m:'media/man.glb?v=3',f:'media/woman.glb?v=3'};   // bump v when a model changes, so browsers don't show a cached one
 async function getFigure(k){if(figures[k])return figures[k];
   const {g,t}=await loadGLB(files[k]);const mesh=new THREE.Mesh(g,bodyMaterial(t));
   mesh.rotation.y=-Math.PI/2;mesh.scale.setScalar(1.75);mesh.position.y=.875;   // model: 1 unit tall, facing +x
