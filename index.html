@@ -323,7 +323,7 @@ const open=()=>{if(loaded)return;loaded=true;progress(1);setTimeout(()=>{loader.
 setTimeout(open,15000);   // never hold the page longer than this on a slow connection
 let want=0,shown=0,seeking=false,seek;
 if(matchMedia('(orientation: portrait)').matches){
-  const N=119,frames=[],cv=document.createElement('canvas'),ctx=cv.getContext('2d');cv.className='film';cv.id='seq';cv.setAttribute('aria-hidden','true');
+  const N=118,frames=[],cv=document.createElement('canvas'),ctx=cv.getContext('2d');cv.className='film';cv.id='seq';cv.setAttribute('aria-hidden','true');
   film.replaceWith(cv);let drawn=-1,got=0;
   // zoomed out a little from a full-height fit (sharper): the frame sits on the bottom edge, the dark top fades into black
   const Z=.84,fit=()=>{const d=Math.min(devicePixelRatio||1,2);cv.width=Math.round(cv.clientWidth*d);cv.height=Math.round(cv.clientHeight*d);drawn=-1;};
@@ -331,7 +331,12 @@ if(matchMedia('(orientation: portrait)').matches){
     ctx.fillStyle='#0a0a0b';ctx.fillRect(0,0,w,h);ctx.imageSmoothingQuality='high';ctx.drawImage(f,(w-dw)/2,h-dh,dw,dh);
     const gr=ctx.createLinearGradient(0,h-dh,0,h-dh+h*.14);gr.addColorStop(0,'#0a0a0b');gr.addColorStop(1,'rgba(10,10,11,0)');ctx.fillStyle=gr;ctx.fillRect(0,h-dh,w,h*.14);drawn=i;cv.classList.add('ready');};
   requestAnimationFrame(()=>{fit();paint(Math.round(shown*(N-1)));});addEventListener('resize',()=>{fit();paint(Math.round(shown*(N-1)));});
-  for(let i=0;i<N;i++){const im=new Image();im.decoding='async';im.onload=im.onerror=()=>{im.ok=im.naturalWidth>0;got++;progress(got/N);if(i===0)paint(0);if(got===N)open();};im.src=`media/seq/${String(i+1).padStart(3,'0')}.webp`;frames.push(im);}
+  // every 4th frame first: the page opens once those are in, the rest fill in while you scroll (sharper frames, same wait)
+  const order=[...Array(N).keys()].sort((a,b)=>(a%4?1:0)-(b%4?1:0)||a-b),first=Math.ceil(N/4);let gotFirst=0;
+  order.forEach(i=>{const im=new Image();im.decoding='async';im.onload=im.onerror=()=>{im.ok=im.naturalWidth>0;got++;
+    if(i%4===0){gotFirst++;progress(gotFirst/first);if(gotFirst===first)open();}
+    const now=Math.round(shown*(N-1));if(i===0||i===now){drawn=-1;let j=now;while(j>0&&!frames[j].ok)j--;paint(j);}};
+    im.src=`media/seq/${String(i+1).padStart(3,'0')}.webp?v=2`;frames[i]=im;});
   seek=()=>{seeking=false;shown+=(want-shown)*.2;if(Math.abs(want-shown)<.0008)shown=want;let i=Math.round(shown*(N-1));while(i>0&&!frames[i].ok)i--;paint(i);if(shown!==want){seeking=true;requestAnimationFrame(seek);}};
 }else{
   const use=src=>{film.src=src;film.addEventListener('loadeddata',()=>{film.currentTime=0;film.classList.add('ready');open();},{once:true});};
