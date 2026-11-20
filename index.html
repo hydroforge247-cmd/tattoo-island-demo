@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tattoo Island · Tattoo collective in Garsfontein, Pretoria</title>
+<meta name="description" content="Tattoo Island: a tattoo collective of five artists at 714 Jacqueline Drive, Garsfontein, Pretoria East. Realism, freehand and fineline work. Book on WhatsApp 073 923 1024.">
+<meta name="theme-color" content="#0e0d0f">
+<link rel="icon" href="media/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0d0f;--ink2:#18161a;--bone:#f1ece4;--bone2:#e6dfd4;--muted:#9a948d;--line:rgba(241,236,228,.14);--brass:#c39a5f;--wa:#0f7a40;--max:1160px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--bone);font:400 16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;letter-spacing:.02em;line-height:.95}
+.wrap{width:min(100% - 32px,var(--max));margin-inline:auto}
+.eyebrow{font:600 12.5px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 22px;border-radius:999px;font:600 15.5px Inter,sans-serif;text-decoration:none;border:0;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1),background .2s}
+.btn:active{transform:scale(.97)}
+.btn-wa{background:var(--wa);color:#fff}.btn-wa:hover{background:#0c6835}
+.btn-ghost{border:1px solid rgba(241,236,228,.4);color:var(--bone);background:rgba(14,13,15,.35);backdrop-filter:blur(6px)}
+.btn svg{width:20px;height:20px}
+.pitch{background:var(--bone);color:#2a2622;font-size:12.5px;text-align:center;padding:6px 12px}
+.sm{display:none}@media(max-width:700px){.lg{display:none}.sm{display:inline}}
+
+/* header */
+header{position:sticky;top:0;z-index:30;background:rgba(14,13,15,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:44px;height:44px;border-radius:50%;object-fit:cover;filter:grayscale(1) contrast(1.1)}
+.brand b{font:400 26px/1 "Bebas Neue",sans-serif;letter-spacing:.06em}
+.brand small{display:block;font:600 10.5px Inter,sans-serif;letter-spacing:.2em;color:var(--muted);margin-top:2px}
+.links{display:flex;gap:26px}.links a{text-decoration:none;font-weight:500;font-size:15px;color:#d8d2c9}.links a:hover{color:#fff}
+@media(max-width:860px){.links{display:none}}
+.nav .btn{min-height:42px;padding:0 16px;font-size:14.5px}
+
+/* hero: the live 3D machine inks a peony onto skin */
+.hero{position:relative;height:calc(100svh - 96px);min-height:560px;max-height:920px;overflow:hidden;background:radial-gradient(70% 60% at 60% 45%,#2a2420 0%,#141215 55%,var(--ink) 100%)}
+#stage{position:absolute;inset:0;touch-action:pan-y;cursor:grab}
+#stage canvas{display:block;width:100%!important;height:100%!important;opacity:0;transition:opacity 1s}
+#stage.live canvas{opacity:1}
+.heroText{position:absolute;left:0;right:0;bottom:0;padding:70px 0 34px;pointer-events:none;background:linear-gradient(0deg,rgba(14,13,15,.96) 0%,rgba(14,13,15,.86) 58%,rgba(14,13,15,.5) 82%,transparent 100%)}
+.heroText .wrap>*{pointer-events:auto}
+.hero h1{font-size:clamp(62px,11vw,148px);margin:10px 0 8px}
+.hero p.lede{max-width:520px;color:#d9d2c8;font-size:clamp(16px,1.6vw,18.5px);margin-bottom:22px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.dragHint{position:absolute;right:18px;top:18px;font:600 12px Inter,sans-serif;letter-spacing:.08em;color:#cfc7bc;background:rgba(14,13,15,.55);border:1px solid var(--line);padding:6px 12px;border-radius:999px;transition:opacity .6s}
+.hero.touched .dragHint{opacity:0}
+.inkLine{position:absolute;left:18px;top:18px;font:600 12px Inter,sans-serif;letter-spacing:.08em;color:#cfc7bc;display:flex;align-items:center;gap:8px}
+.inkLine i{display:block;width:90px;height:3px;border-radius:2px;background:rgba(241,236,228,.18);overflow:hidden}.inkLine i b{display:block;height:100%;width:0;background:var(--brass)}
+@media(min-width:900px){.heroText{background:linear-gradient(90deg,rgba(14,13,15,.88) 0%,rgba(14,13,15,.5) 38%,transparent 62%);top:0;display:flex;align-items:flex-end;padding-bottom:64px}}
+
+/* sections */
+section{padding:84px 0;position:relative}
+.big{font-size:clamp(46px,7vw,92px);margin:12px 0 14px}
+.lede2{color:#c9c2b8;max-width:560px}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* work: swipe row with tilt */
+.rowHead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.arrows{display:flex;gap:8px}
+.arrows button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--bone);cursor:pointer;display:grid;place-items:center}
+.arrows button:hover{border-color:var(--bone)}
+.arrows svg{width:20px;height:20px}
+.strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:28px 16px 18px;margin-top:6px;scrollbar-width:none;perspective:1100px}
+.strip::-webkit-scrollbar{display:none}
+@media(min-width:1192px){.strip{padding-inline:calc((100vw - var(--max))/2)}}
+.card{flex:0 0 min(74vw,330px);scroll-snap-align:center;border-radius:18px;overflow:hidden;position:relative;background:var(--ink2);transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.card img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.card figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;background:linear-gradient(0deg,rgba(10,9,11,.92),transparent);font-size:14px;color:#e8e1d7}
+.card figcaption b{display:block;font:400 22px/1 "Bebas Neue",sans-serif;letter-spacing:.04em;color:#fff;margin-bottom:3px}
+.card .glare{position:absolute;inset:0;background:radial-gradient(60% 50% at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.16),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+.card:hover .glare,.card.tilt .glare{opacity:1}
+
+/* touch the needle */
+.try{background:var(--bone);color:#201d1b}
+.try .eyebrow{color:#8a6334}.try .lede2{color:#4c4640}
+.tryGrid{display:grid;gap:28px;align-items:center}
+@media(min-width:900px){.tryGrid{grid-template-columns:1fr 1.15fr}}
+.pad{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 20px 50px rgba(60,40,20,.25);touch-action:none;cursor:crosshair;aspect-ratio:4/3;background:#d9b49a}
+.pad canvas{width:100%;height:100%;display:block}
+.pad .hint{position:absolute;inset:auto 0 14px;text-align:center;font:600 13px Inter,sans-serif;color:rgba(40,25,15,.7);pointer-events:none;transition:opacity .5s}
+.pad.used .hint{opacity:0}
+.padBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn-dark{background:#201d1b;color:var(--bone)}
+.btn-line{border:1px solid rgba(32,29,27,.3);color:#201d1b;background:transparent}
+
+/* artists */
+.artists{display:grid;gap:16px;margin-top:30px}
+@media(min-width:900px){.artists{grid-template-columns:1.2fr 1fr}}
+.owner{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center;border:1px solid var(--line);border-radius:22px;padding:18px;background:var(--ink2)}
+.owner img{width:150px;height:190px;object-fit:cover;object-position:50% 20%;border-radius:14px;filter:grayscale(1) contrast(1.05)}
+.owner h3{font-size:40px}
+.owner p{color:#c9c2b8;font-size:15px}
+.owner>div{min-width:0}.owner .btn{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.owner .tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+.tags span{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:#ddd5ca}
+.crew{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.crew a{display:flex;flex-direction:column;justify-content:space-between;min-height:110px;border:1px solid var(--line);border-radius:18px;padding:16px;text-decoration:none;background:linear-gradient(160deg,#1c191d,#121013);transition:border-color .2s,transform .3s}
+.crew a:hover{border-color:var(--brass);transform:translateY(-3px)}
+.crew b{font:400 24px/1 "Bebas Neue",sans-serif;letter-spacing:.04em}
+.crew small{color:var(--muted);font-size:13px}
+@media(max-width:520px){.owner{grid-template-columns:110px 1fr}.owner img{width:110px;height:150px}.owner h3{font-size:32px}}
+
+/* booking steps */
+.steps{display:grid;gap:12px;margin-top:28px;counter-reset:s}
+@media(min-width:800px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps div{border-top:1px solid var(--line);padding-top:16px;counter-increment:s}
+.steps div::before{content:"0" counter(s);font:400 44px/1 "Bebas Neue",sans-serif;color:var(--brass);display:block;margin-bottom:6px}
+.steps b{display:block;font-size:17px;margin-bottom:4px}
+.steps p{color:#c9c2b8;font-size:15px}
+
+/* visit */
+.visit{border-top:1px solid var(--line)}
+.visitGrid{display:grid;gap:22px}
+@media(min-width:900px){.visitGrid{grid-template-columns:1fr 1.2fr}}
+.vrow{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.vrow svg{width:20px;height:20px;flex:none;margin-top:3px;color:var(--brass)}
+.vrow a{text-decoration:none}
+.map{border-radius:20px;overflow:hidden;min-height:320px;border:1px solid var(--line);background:#1a181b}
+.map iframe{width:100%;height:100%;min-height:320px;border:0;filter:grayscale(1) invert(.9) contrast(.9)}
+footer{padding:40px 0 110px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
+footer a{color:#d8d2c9}
+details summary{cursor:pointer;padding:10px 0;display:inline-block}
+.vrow a,footer a{display:inline-block;padding:10px 0;margin:-10px 0}
+
+/* phone bar */
+.bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:40;display:none;gap:8px}
+.bar a{flex:1}
+@media(max-width:700px){.bar{display:flex}}
+.bar .btn{min-height:52px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.bar .btn-ghost{background:rgba(24,22,26,.92)}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.card{transition:none}}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></symbol>
+  <symbol id="ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></g></symbol>
+</svg>
+<div class="pitch"><span class="lg">A website preview made for Tattoo Island by </span><span class="sm">Website preview by </span><b>NFC Software Solutions</b></div>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Tattoo Island, back to the top"><img src="media/logo.webp" alt="" width="44" height="44"><span><b>Tattoo Island</b><small>GARSFONTEIN · PRETORIA</small></span></a>
+    <nav class="links" aria-label="Sections"><a href="#work">Work</a><a href="#try">Try the needle</a><a href="#artists">Artists</a><a href="#book">Book</a><a href="#visit">Visit</a></nav>
+    <a class="btn btn-wa" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Book</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" aria-label="Welcome" style="padding:0">
+  <div id="stage" role="img" aria-label="A 3D tattoo machine inking a peony onto skin; drag to turn it"></div>
+  <div class="inkLine" aria-hidden="true">Inking <i><b id="inkBar"></b></i></div>
+  <div class="dragHint" aria-hidden="true">Drag to turn</div>
+  <div class="heroText"><div class="wrap">
+    <span class="eyebrow">Tattoo collective · Pretoria East</span>
+    <h1>Tattoo Island</h1>
+    <p class="lede">Realism, freehand and fineline work by five artists, now tattooing from 714 Jacqueline Drive, Garsfontein.</p>
+    <div class="ctas">
+      <a class="btn btn-wa" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp to book</a>
+      <a class="btn btn-ghost" href="#work">See the work</a>
+    </div>
+  </div></div>
+</section>
+
+<section id="work">
+  <div class="wrap rowHead reveal">
+    <div><span class="eyebrow">Fresh off the needle</span><h2 class="big">The work</h2><p class="lede2">Recent pieces from Carl's chair: big freehand floral sleeves, realism and cover-ups.</p></div>
+    <div class="arrows"><button type="button" data-dir="-1" aria-label="Previous pieces"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" data-dir="1" aria-label="More pieces"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
+  </div>
+  <div class="strip" id="strip" tabindex="0" role="region" aria-label="Tattoo work, swipe for more">
+    <figure class="card"><img src="media/w-freehand.webp" alt="Large black and grey floral tattoo on a thigh, done freehand" loading="lazy"><span class="glare"></span><figcaption><b>Freehand floral</b>Drawn straight onto the skin, no stencil.</figcaption></figure>
+    <figure class="card"><img src="media/w-sleeve-start.webp" alt="Close-up of black and grey flower shading on a leg sleeve" loading="lazy"><span class="glare"></span><figcaption><b>Leg sleeve, day one</b>Starting out strong.</figcaption></figure>
+    <figure class="card"><img src="media/w-sleeve-progress.webp" alt="Leg sleeve in progress with shaded flowers and fresh linework" loading="lazy"><span class="glare"></span><figcaption><b>Leg sleeve in progress</b>Shading and new linework.</figcaption></figure>
+    <figure class="card"><img src="media/w-horror.webp" alt="Black and grey realism face, part of a horror sleeve" loading="lazy"><span class="glare"></span><figcaption><b>Horror sleeve</b>Realism, loading…</figcaption></figure>
+    <figure class="card"><img src="media/w-linework.webp" alt="Fresh floral linework across a hip and thigh" loading="lazy"><span class="glare"></span><figcaption><b>Floral linework</b>Hip to thigh, ready for shading.</figcaption></figure>
+    <figure class="card"><img src="media/w-coverup.webp" alt="Carl tattooing over an older piece with gloved hands" loading="lazy"><span class="glare"></span><figcaption><b>Cover-up</b>A two-day cover-up in the making.</figcaption></figure>
+    <figure class="card"><img src="media/w-turbo.webp" alt="Stencil for a turbocharger tattoo" loading="lazy"><span class="glare"></span><figcaption><b>Turbo</b>For the car people.</figcaption></figure>
+    <figure class="card"><img src="media/w-quick.webp" alt="Black and grey bird illustration tattoo in progress" loading="lazy"><span class="glare"></span><figcaption><b>Just another quick something</b>Black and grey.</figcaption></figure>
+  </div>
+  <div class="wrap"><a class="btn btn-ghost reveal" href="https://www.instagram.com/carl_the_creator.2.0/" target="_blank" rel="noopener" style="margin-top:14px"><svg aria-hidden="true"><use href="#ig"/></svg>More on Instagram</a></div>
+</section>
+
+<section class="try" id="try">
+  <div class="wrap tryGrid">
+    <div class="reveal">
+      <span class="eyebrow">Try the needle</span>
+      <h2 class="big">Sketch your idea</h2>
+      <p class="lede2">Draw on the skin with your finger or mouse. Rough is fine: Carl turns ideas into custom pieces. Save your sketch and send it with your booking.</p>
+    </div>
+    <div class="reveal">
+      <div class="pad" id="pad"><canvas id="padCanvas" aria-label="Drawing pad that looks like skin; draw your tattoo idea here"></canvas><span class="hint">Draw here</span></div>
+      <div class="padBtns">
+        <button type="button" class="btn btn-dark" id="padSave">Save my sketch</button>
+        <a class="btn btn-wa" href="https://wa.me/27739231024?text=Hi%20Carl!%20Here%27s%20my%20tattoo%20idea%20(I%27ll%20attach%20my%20sketch)%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Send it to Carl</a>
+        <button type="button" class="btn btn-line" id="padClear">Clear</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="artists">
+  <div class="wrap">
+    <div class="reveal"><span class="eyebrow">A collective of creatives</span><h2 class="big">The artists</h2><p class="lede2">Five artists who ended up on the same shore. Tap an artist to see their work on Instagram.</p></div>
+    <div class="artists">
+      <article class="owner reveal">
+        <img src="media/carl.webp" alt="Carl Jansen, owner of Tattoo Island" loading="lazy">
+        <div><span class="eyebrow">Owner</span><h3>Carl Jansen</h3>
+          <div class="tags"><span>Realism</span><span>Freehand</span><span>Cover-ups</span><span>Sleeves</span></div>
+          <p>Realism artist in Pretoria. Book a full day and he'll freehand it on the spot.</p>
+          <a class="btn btn-ghost" style="margin-top:12px;min-height:42px" href="https://www.instagram.com/carl_the_creator.2.0/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ig"/></svg>@carl_the_creator.2.0</a></div>
+      </article>
+      <div class="crew reveal">
+        <a href="https://www.instagram.com/ace_of_spades_tattoo/" target="_blank" rel="noopener"><small>Resident artist</small><b>Ace of Spades</b><small>@ace_of_spades_tattoo</small></a>
+        <a href="https://www.instagram.com/inkedby_ryan/" target="_blank" rel="noopener"><small>Resident artist</small><b>Inked by Ryan</b><small>@inkedby_ryan</small></a>
+        <a href="https://www.instagram.com/ls.inked/" target="_blank" rel="noopener"><small>Resident artist</small><b>LS Inked</b><small>@ls.inked</small></a>
+        <a href="https://www.instagram.com/_october_ink/" target="_blank" rel="noopener"><small>Resident artist</small><b>October Ink</b><small>@_october_ink</small></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="wrap">
+    <div class="reveal"><span class="eyebrow">How to book</span><h2 class="big">Three steps to the chair</h2></div>
+    <div class="steps">
+      <div class="reveal"><b>Message Carl</b><p>WhatsApp 073 923 1024 is the fastest. An Instagram DM works too.</p></div>
+      <div class="reveal"><b>Share your idea</b><p>Tell him the placement and size, and send a reference or your sketch from above.</p></div>
+      <div class="reveal"><b>Book your session</b><p>A sitting or a full day, from small pieces and cover-ups to full sleeves.</p></div>
+    </div>
+    <div class="ctas reveal" style="margin-top:28px"><a class="btn btn-wa" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp 073 923 1024</a></div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap visitGrid">
+    <div class="reveal">
+      <span class="eyebrow">Now in Pretoria East</span>
+      <h2 class="big">714 Jacqueline Drive</h2>
+      <p class="lede2" style="margin-bottom:12px">Tattoo Island works from inside STIJL MEN in Garsfontein. Sessions are by appointment.</p>
+      <div class="vrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg><span>714 Jacqueline Drive, Garsfontein, Pretoria<br><small style="color:var(--muted)">Inside STIJL MEN</small></span></div>
+      <div class="vrow"><svg aria-hidden="true"><use href="#wa"/></svg><a href="https://wa.me/27739231024" target="_blank" rel="noopener">WhatsApp 073 923 1024</a></div>
+      <div class="vrow"><svg aria-hidden="true"><use href="#ig"/></svg><a href="https://www.instagram.com/tattoo_island_22/" target="_blank" rel="noopener">@tattoo_island_22</a></div>
+    </div>
+    <div class="map reveal"><iframe title="Map to Tattoo Island, 714 Jacqueline Drive, Garsfontein" loading="lazy" src="https://www.google.com/maps?q=714+Jacqueline+Drive,+Garsfontein,+Pretoria&output=embed"></iframe></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <p><b style="color:var(--bone)">Tattoo Island</b> · 714 Jacqueline Drive, Garsfontein, Pretoria</p>
+  <details style="margin-top:8px"><summary>Privacy (POPIA)</summary><p style="margin-top:6px">This site doesn't collect personal information. Sketches you draw stay on your device unless you choose to send them. WhatsApp and Instagram links open those services under their own privacy terms.</p></details>
+  <p style="margin-top:8px">Website by <a href="#">NFC Software Solutions</a></p>
+</div></footer>
+
+<div class="bar"><a class="btn btn-wa" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Book on WhatsApp</a><a class="btn btn-ghost" href="#work" style="flex:.6">The work</a></div>
+
+<script>
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+
+// work strip: arrows, and each card tilts toward your finger / mouse with a glare
+const strip=document.getElementById('strip');
+document.querySelectorAll('.arrows button').forEach(b=>b.onclick=()=>strip.scrollBy({left:+b.dataset.dir*Math.min(strip.clientWidth*.8,700),behavior:'smooth'}));
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!still)strip.querySelectorAll('.card').forEach(c=>{
+  const move=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    c.style.transform=`rotateY(${(x-.5)*14}deg) rotateX(${(.5-y)*12}deg) translateZ(10px)`;c.style.setProperty('--gx',x*100+'%');c.style.setProperty('--gy',y*100+'%');c.classList.add('tilt');};
+  const off=()=>{c.style.transform='';c.classList.remove('tilt');};
+  c.addEventListener('pointermove',move);c.addEventListener('pointerleave',off);c.addEventListener('pointerup',off);c.addEventListener('pointercancel',off);});
+// on phones the card in the middle of the strip leans in as you swipe (depth while browsing)
+if(!still){let tick=false;const lean=()=>{tick=false;const mid=strip.getBoundingClientRect().left+strip.clientWidth/2;
+  strip.querySelectorAll('.card:not(.tilt)').forEach(c=>{const r=c.getBoundingClientRect(),k=Math.max(-1,Math.min(1,(r.left+r.width/2-mid)/r.width));c.style.transform=`rotateY(${-k*18}deg) scale(${1-Math.abs(k)*.06})`;});};
+  strip.addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(lean);}},{passive:true});lean();}
+
+// the sketch pad: skin you can draw on, the phone buzzes softly while you ink (Android)
+{const pad=document.getElementById('pad'),cv=document.getElementById('padCanvas'),g=cv.getContext('2d');
+ const skin=()=>{const r=pad.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);cv.width=r.width*d;cv.height=r.height*d;g.setTransform(d,0,0,d,0,0);
+   const gr=g.createRadialGradient(r.width*.45,r.height*.4,10,r.width*.5,r.height*.5,r.width*.75);gr.addColorStop(0,'#e7c3a6');gr.addColorStop(1,'#c99a7c');g.fillStyle=gr;g.fillRect(0,0,r.width,r.height);
+   for(let i=0;i<1400;i++){g.fillStyle=`rgba(120,70,45,${Math.random()*.06})`;g.fillRect(Math.random()*r.width,Math.random()*r.height,1.2,1.2);}};
+ skin();let last=null,buzz=0;
+ const pt=e=>{const r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top];};
+ cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);last=pt(e);pad.classList.add('used');});
+ cv.addEventListener('pointermove',e=>{if(!last)return;const p=pt(e);g.strokeStyle='rgba(18,16,20,.92)';g.lineCap=g.lineJoin='round';g.lineWidth=3.2;g.shadowColor='rgba(20,20,40,.35)';g.shadowBlur=2;
+   g.beginPath();g.moveTo(last[0],last[1]);g.lineTo(p[0],p[1]);g.stroke();last=p;const n=performance.now();if(navigator.vibrate&&n-buzz>90){navigator.vibrate(8);buzz=n;}});
+ const up=()=>last=null;cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+ document.getElementById('padClear').onclick=()=>{skin();pad.classList.remove('used');};
+ document.getElementById('padSave').onclick=()=>cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-tattoo-idea.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000);});
+ let w=pad.clientWidth;addEventListener('resize',()=>{if(Math.abs(pad.clientWidth-w)>40){w=pad.clientWidth;skin();pad.classList.remove('used');}});}
+</script>
+
+<script type="module">
+// The live 3D hero: a rotary tattoo machine inks a peony onto a curved patch of skin, stroke by stroke,
+// lifting between lines. Drag to turn it. Renders only while visible; reduced motion shows the finished piece.
+const stage=document.getElementById('stage'),bar=document.getElementById('inkBar'),hero=stage.closest('.hero');
+const THREE=await import('./media/three.module.min.js');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const W=()=>stage.clientWidth,H=()=>stage.clientHeight;
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(W(),H());
+renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+stage.appendChild(renderer.domElement);
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(32,W()/H(),.1,80);
+const wide=()=>W()/H()>1.1;
+// desktop: look left of the drawing so it sits right of the title; phone: look below it so it sits above the title
+const frame=()=>{cam.aspect=W()/H();if(wide()){cam.position.set(-2.7,6.4,6.6);cam.lookAt(-2.7,0,.1);}else{cam.position.set(0,8.4,7.4);cam.lookAt(0,0,1.5);}cam.updateProjectionMatrix();};frame();
+
+scene.add(new THREE.HemisphereLight(0xfff0e0,0x1a1418,.55));
+const key=new THREE.SpotLight(0xffe2c4,140,40,.55,.6,1.6);key.position.set(-4,9,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.0004;scene.add(key);
+const rim=new THREE.DirectionalLight(0x9fb8ff,1.2);rim.position.set(5,3,-6);scene.add(rim);
+
+// ---- skin: a big gently curved surface that fades into the dark at its edges; the canvas is also where the ink goes
+const S=2048,cv=document.createElement('canvas');cv.width=cv.height=S;const g=cv.getContext('2d');
+const paintSkin=()=>{g.shadowBlur=0;const gr=g.createRadialGradient(S*.5,S*.5,S*.05,S*.5,S*.5,S*.62);gr.addColorStop(0,'#e2b998');gr.addColorStop(.45,'#c9967a');gr.addColorStop(.8,'#5a3f35');gr.addColorStop(1,'#141215');g.fillStyle=gr;g.fillRect(0,0,S,S);
+  for(let i=0;i<26000;i++){g.fillStyle=`rgba(110,60,40,${Math.random()*.05})`;g.fillRect(Math.random()*S,Math.random()*S,2,2);}
+  for(let i=0;i<110;i++){g.strokeStyle=`rgba(120,70,50,${.025+Math.random()*.03})`;g.lineWidth=1.5;g.beginPath();const y=Math.random()*S;g.moveTo(0,y);g.bezierCurveTo(S*.3,y+30,S*.7,y-30,S,y+15);g.stroke();}};
+paintSkin();
+const tex=new THREE.CanvasTexture(cv);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;
+const SW=14,SH=14;const sg=new THREE.PlaneGeometry(SW,SH,96,96);
+const bend=x=>-(x*x)*.03;   // curve across the width, like a forearm
+{const p=sg.attributes.position;for(let i=0;i<p.count;i++)p.setZ(i,bend(p.getX(i)));sg.computeVertexNormals();}
+const skin=new THREE.Mesh(sg,new THREE.MeshStandardMaterial({map:tex,roughness:.62,metalness:0}));
+skin.rotation.x=-Math.PI/2;skin.receiveShadow=true;
+const rig=new THREE.Group();rig.add(skin);scene.add(rig);
+// the design lives in a 0..1 box, 4.4 units across, in the middle of the skin
+const D=5.8,toUV=([x,y])=>[.5+(x-.5)*D/SW,.5+(y-.5)*D/SH];
+const onSkin=(p,lift=0)=>{const[u,v]=toUV(p),x=(u-.5)*SW,y=(v-.5)*SH;return new THREE.Vector3(x,bend(x)+lift,-y);};
+
+// ---- the machine: a pen-style rotary, built along +Y with the needle tip at the origin
+const pen=new THREE.Group();
+const metal=new THREE.MeshStandardMaterial({color:0x1d1c20,roughness:.32,metalness:.85});
+const rubber=new THREE.MeshStandardMaterial({color:0x111012,roughness:.9});
+const brass=new THREE.MeshStandardMaterial({color:0xc39a5f,roughness:.35,metalness:.9});
+const clear=new THREE.MeshPhysicalMaterial({color:0xdde8f0,roughness:.08,transmission:.85,thickness:.2,transparent:true,opacity:.55});
+const cyl=(r1,r2,h,y,m,seg=40)=>{const c=new THREE.Mesh(new THREE.CylinderGeometry(r1,r2,h,seg),m);c.position.y=y+h/2;c.castShadow=true;pen.add(c);return c;};
+const needle=cyl(.012,.004,.5,-.02,new THREE.MeshStandardMaterial({color:0xd8dade,metalness:1,roughness:.2}),12);
+cyl(.06,.14,.55,.25,clear);cyl(.14,.15,.18,.78,clear);           // cartridge
+cyl(.2,.19,1.05,.95,rubber);                                       // grip
+for(let i=0;i<7;i++)cyl(.205,.205,.035,1.02+i*.14,rubber);         // grip rings
+cyl(.19,.21,.08,2,brass);                                          // brass collar
+cyl(.21,.2,1.45,2.08,metal);                                       // motor body
+cyl(.2,.13,.25,3.53,metal);cyl(.07,.07,.35,3.78,brass,20);         // tail + RCA plug
+const cord=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0,4.1,0),new THREE.Vector3(.2,4.8,.3),new THREE.Vector3(1.4,5.2,1.2),new THREE.Vector3(3.5,4.6,2.5)]),40,.035,8),rubber);pen.add(cord);
+pen.scale.setScalar(.55);rig.add(pen);
+const TILT=new THREE.Euler(-.38,0,-.42);   // leaning away and to the right, like it's held in a hand
+
+// ---- the design: a peony (cupped, scalloped petals in three rings) with leaves; the pen lifts between strokes
+const strokes=[];const C=[.5,.54];
+const petal=(a0,a1,r0,r1,n=30)=>{const p=[];for(let i=0;i<=n;i++){const t=i/n,a=a0+(a1-a0)*t,swell=Math.pow(Math.sin(Math.PI*t),.55),notch=.012*Math.exp(-Math.pow((t-.5)/.07,2)),ruffle=.018*Math.sin(t*Math.PI*7)*swell;
+  const r=r0+(r1-r0)*swell-notch*(r1-r0)*3+ruffle*(r1-r0)*3;p.push([C[0]+Math.cos(a)*r,C[1]+Math.sin(a)*r*.9]);}return p;};
+[[4,.0,.08,.0],[5,.04,.15,.6],[6,.09,.23,.15],[7,.15,.31,.45]].forEach(([n,r0,r1,off])=>{for(let k=0;k<n;k++){const a0=off+k/n*Math.PI*2,w=Math.PI*2/n*1.12;strokes.push(petal(a0,a0+w,r0,r1));
+  if(r1>.15){const mid=a0+w/2,q=[];for(let i=0;i<=8;i++){const t=i/8,r=r0+(r1-r0)*(.35+.4*t);q.push([C[0]+Math.cos(mid+.05*Math.sin(t*3))*r,C[1]+Math.sin(mid)*r*.9]);}strokes.push(q);}}});  // a vein in each big petal
+const leaf=(ang,len)=>{const base=[C[0]+Math.cos(ang)*.29,C[1]+Math.sin(ang)*.27],tip=[base[0]+Math.cos(ang)*len,base[1]+Math.sin(ang)*len],nx=-Math.sin(ang)*.055,ny=Math.cos(ang)*.055,s1=[],s2=[],mid=[];
+  for(let i=0;i<=22;i++){const t=i/22,w=Math.sin(Math.PI*Math.pow(t,.8)),x=base[0]+(tip[0]-base[0])*t,y=base[1]+(tip[1]-base[1])*t;s1.push([x+nx*w,y+ny*w]);s2.push([x-nx*w,y-ny*w]);mid.push([x,y]);}
+  strokes.push(s1,s2,mid.slice(1,19));};
+leaf(-1.0,.17);leaf(-2.25,.15);leaf(.35,.12);
+const total=strokes.reduce((n,s)=>n+s.length,0);
+console.assert(strokes.every(s=>s.every(([x,y])=>x>0&&x<1&&y>0&&y<1)),'design stays inside its box');
+
+// ink: draw segment by segment into the canvas (canvas y is flipped against uv v)
+const px=p=>{const[u,v]=toUV(p);return[u*S,(1-v)*S];};
+const INK=4.2;
+const inkSeg=(a,b,w)=>{const[x0,y0]=px(a),[x1,y1]=px(b);g.strokeStyle='rgba(16,14,20,.93)';g.lineWidth=w;g.lineCap=g.lineJoin='round';g.shadowColor='rgba(30,30,60,.45)';g.shadowBlur=3;g.beginPath();g.moveTo(x0,y0);g.lineTo(x1,y1);g.stroke();};
+let si=0,pi=0,done=0,hold=0,lift=0;
+const drawAll=()=>{paintSkin();strokes.forEach(s=>{for(let i=1;i<s.length;i++)inkSeg(s[i-1],s[i],INK);});tex.needsUpdate=true;};
+
+// ---- drag to turn the whole thing, it eases back slowly
+let yaw=0,vel=0,down=false,lx=0;
+stage.addEventListener('pointerdown',e=>{down=true;lx=e.clientX;stage.setPointerCapture(e.pointerId);hero.classList.add('touched');});
+stage.addEventListener('pointermove',e=>{if(!down)return;const d=(e.clientX-lx)/W()*3;yaw+=d;vel=d;lx=e.clientX;});
+const up=()=>down=false;stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);
+addEventListener('resize',()=>{renderer.setSize(W(),H());frame();});
+let visible=true;new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(stage);
+
+const clock=new THREE.Clock(),tipW=new THREE.Vector3(),SPEED=reduce?1e9:150;   // points per second
+if(reduce){drawAll();done=1;}
+let acc=0;
+renderer.setAnimationLoop(()=>{
+  const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
+  if(!visible)return;
+  if(!down){yaw+=vel;vel*=.92;yaw*=.985;}
+  rig.rotation.y=yaw+(reduce?0:Math.sin(t*.25)*.12);
+  // advance the drawing
+  let target;
+  if(!done){acc+=dt*SPEED;let moved=false;
+    while(acc>=1&&si<strokes.length){const s=strokes[si];if(pi>0){inkSeg(s[pi-1],s[pi],INK);moved=true;}pi++;acc-=1;if(pi>=s.length){si++;pi=0;lift=1;}}
+    if(moved)tex.needsUpdate=true;
+    if(si>=strokes.length){done=1;hold=0;}
+    const s=strokes[Math.min(si,strokes.length-1)],p=s[Math.min(pi,s.length-1)];
+    lift=Math.max(0,lift-dt*4);target=onSkin(p,.03+lift*.5);
+    const drawn=strokes.slice(0,si).reduce((n,s)=>n+s.length,0)+pi;bar.style.width=(drawn/total*100).toFixed(1)+'%';
+  }else{hold+=dt;target=onSkin([1.12,.25],1.1);   // rest beside the finished piece
+    if(!reduce&&hold>5){si=0;pi=0;done=0;acc=0;paintSkin();tex.needsUpdate=true;}}
+  // pen follows the target smoothly; buzzes while inking
+  tipW.lerp(target,Math.min(1,dt*(done?2:18)));
+  pen.position.copy(tipW);pen.rotation.copy(TILT);
+  if(!done&&!reduce){pen.position.x+=(Math.random()-.5)*.006;needle.position.y=-.02+Math.sin(t*180)*.02;}
+  renderer.render(scene,cam);
+});
+stage.classList.add('live');
+</script>
+</body>
+</html>
