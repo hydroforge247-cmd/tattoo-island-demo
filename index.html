@@ -70,8 +70,8 @@ section{position:relative}
 
 /* the work: every piece starts as its purple stencil, then the ink goes in as it reaches you */
 .grid3{display:grid;gap:56px 24px;margin-top:48px}
-@media(min-width:760px){.grid3{grid-template-columns:repeat(2,1fr)}.grid3 .piece:nth-child(even){margin-top:90px}}
-@media(min-width:1100px){.grid3{grid-template-columns:repeat(3,1fr)}.grid3 .piece:nth-child(even){margin-top:0}.grid3 .piece:nth-child(3n+2){margin-top:110px}}
+@media(min-width:760px){.grid3{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.grid3{grid-template-columns:repeat(3,1fr)}}
 .piece{position:relative}
 .frame{position:relative;aspect-ratio:4/5;overflow:hidden;background:#d8b89e}
 .frame canvas,.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -79,35 +79,28 @@ section{position:relative}
 .frame .tag{position:absolute;left:12px;top:12px;font:700 10.5px Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:6px 9px;background:rgba(10,10,11,.75);color:#fff;transition:background .4s}
 .frame .tag::before{content:"Stencil"}
 .piece.inked .tag{background:var(--red)}.piece.inked .tag::before{content:"Inked"}
-.piece figcaption{margin-top:12px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px;color:#cfc8bf}
+.piece figcaption{margin-top:12px;min-height:58px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px;color:#cfc8bf}
 .piece figcaption b{font:400 26px/1.05 Anton,sans-serif;text-transform:uppercase;color:var(--paper)}
 .piece .n{font:700 12px Inter,sans-serif;letter-spacing:.2em;color:#ff5a4e}
 
 /* watch the needle, then try it */
 .paper{background:var(--paper);color:#151416}
-.paper .kicker,.duo h3 span{color:#b01c15}
+.paper .kicker{color:#b01c15}
 .paper .lead{color:#3a3633}
 .blot{clip-path:circle(var(--r,0%) at 50% 0%)}
-.duo{display:grid;gap:34px;margin-top:40px}
-@media(min-width:900px){.duo{grid-template-columns:1fr 1fr}}
-.duo h3{font:400 30px/1 Anton,sans-serif;text-transform:uppercase;margin:0 0 14px;display:flex;align-items:baseline;gap:12px}
-.duo h3 span{font:700 12px Inter,sans-serif;letter-spacing:.2em;color:var(--red)}
-.stageBox{position:relative;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(70% 60% at 50% 45%,#2a2420,#141215 70%);border:2px solid #151416;box-shadow:12px 12px 0 #151416}
+.stageBox{position:relative;max-width:980px;margin:36px auto 0;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(70% 60% at 50% 45%,#2a2420,#141215 70%);border:2px solid #151416;box-shadow:12px 12px 0 #151416}
 #stage{position:absolute;inset:0}
 #stage canvas{display:block;width:100%!important;height:100%!important;opacity:0;transition:opacity 1s}
 #stage.live canvas{opacity:1}
-.dragHint{position:absolute;inset:auto 0 12px;text-align:center;font:700 11.5px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,239,233,.7);pointer-events:none;transition:opacity .5s}
-.stageBox.touched .dragHint{opacity:0}
-.padBox{position:relative;aspect-ratio:4/3;overflow:hidden;touch-action:none;cursor:crosshair;box-shadow:12px 12px 0 #151416;border:2px solid #151416;background:#d9b49a}
-@media(hover:hover){.padBox{cursor:none}}
-.padBox canvas{width:100%;height:100%;display:block}
-.padBox .hint{position:absolute;inset:auto 0 14px;text-align:center;font:700 12px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(40,25,15,.65);pointer-events:none;transition:opacity .5s}
-.padBox.used .hint{opacity:0}
-.mach{position:absolute;left:0;top:0;width:110px;height:auto;pointer-events:none;opacity:0;transition:opacity .2s;transform-origin:1.4px 113.8px;filter:drop-shadow(10px 14px 8px rgba(50,25,10,.45));z-index:2}
-.padBox.hover .mach,.padBox.inking .mach{opacity:1}
-.padBox.inking .mach{animation:buzz .045s linear infinite}
-@keyframes buzz{50%{margin-left:.7px;margin-top:-.6px}}
-.padBtns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+@media(max-width:700px){.stageBox{aspect-ratio:1/1}}
+#stage{touch-action:pan-y}.stageBox.yours #stage{touch-action:none;cursor:crosshair}
+.turn{position:absolute;left:12px;top:12px;right:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;pointer-events:none}
+.turn b{font:700 11.5px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:8px 11px;background:rgba(10,10,11,.8);color:#fff;transition:background .3s}
+.stageBox.yours .turn b{background:var(--stencil)}
+.turn i{font:700 11px Inter,sans-serif;font-style:normal;letter-spacing:.16em;color:rgba(242,239,233,.8)}
+.finish{position:absolute;inset:auto 0 0;padding:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;background:linear-gradient(0deg,rgba(10,10,11,.85),transparent);opacity:0;pointer-events:none;transition:opacity .5s}
+.stageBox.over .finish{opacity:1;pointer-events:auto}
+.padBtns{justify-content:center;display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
 .paper .btn-line{color:#151416}
 
 .list{margin-top:34px;border-top:2px solid var(--paper)}
@@ -148,11 +141,18 @@ details summary{cursor:pointer;padding:10px 0;display:inline-block}
 body.pastHero .bar{transform:none}
 .bar .btn{min-height:52px;flex:1;white-space:nowrap;padding:0 12px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .bar .btn-line{background:var(--ink);color:var(--paper);flex:.6}
+.loader{position:fixed;inset:0;z-index:100;background:var(--ink);display:grid;place-content:center;justify-items:center;gap:22px;transition:opacity .6s,visibility .6s}
+.loader.done{opacity:0;visibility:hidden}
+.loader img{width:84px;height:84px;border-radius:50%}
+.loader .lb{width:180px;height:2px;background:rgba(242,239,233,.15);overflow:hidden}.loader .lb b{display:block;height:100%;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.loader span{font:700 11px Inter,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#cfc8bf}
+body.loading{overflow:hidden}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.blot{clip-path:none}}
 </style>
 </head>
-<body>
+<body class="loading">
+<div class="loader" id="loader" aria-hidden="true"><img src="media/logo.webp" alt=""><div class="lb"><b id="lbar"></b></div><span>Loading the ink</span></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.700-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.500 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.700-1.200.2-.6.2-1.100.1-1.200l-.4-.2z"/></symbol>
   <symbol id="arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></symbol>
@@ -212,19 +212,13 @@ body.pastHero .bar{transform:none}
 <section class="paper pad-y blot" id="needle">
   <div class="wrap">
     <span class="kicker reveal">The needle</span>
-    <h2 class="display h2 reveal" style="margin-top:10px">Watch it, <span class="serif">then</span> try it</h2>
-    <div class="duo">
-      <div class="reveal">
-        <h3><span>01</span>Every line by hand</h3>
-        <div class="stageBox" id="stageBox"><div id="stage" role="img" aria-label="A 3D coil tattoo machine inking a peony onto skin; drag to turn it"></div><div class="dragHint" aria-hidden="true">Drag to turn</div></div>
-      </div>
-      <div class="reveal">
-        <h3><span>02</span>Your turn</h3>
-        <div class="padBox" id="pad"><img class="mach" id="mach" src="media/machine.webp" alt="" aria-hidden="true"><canvas id="padCanvas" aria-label="Drawing pad that looks like skin; draw your tattoo idea here"></canvas><span class="hint">Touch the skin to start</span></div>
-        <div class="padBtns"><button type="button" class="btn btn-red" id="padSave">Save my sketch</button><button type="button" class="btn btn-line" id="padClear">Clear</button></div>
-        <p class="lead" style="font-size:15px">Your phone buzzes while you ink. Rough is fine: save it and send it to Carl with your booking.</p>
-      </div>
+    <h2 class="display h2 reveal" style="margin-top:10px">Ink it <span class="serif">with</span> Carl</h2>
+    <p class="lead reveal">The machine lines part of a peony, slowly. Then it's your turn: trace the purple stencil with your finger or mouse. Lift off, and the machine carries on.</p>
+    <div class="stageBox" id="stageBox"><div id="stage" role="img" aria-label="A 3D coil tattoo machine and you take turns inking a peony onto skin"></div>
+      <div class="turn" aria-live="polite"><b id="turnText">Get ready</b><i id="turnStep"></i></div>
+      <div class="finish"><a class="btn btn-wa" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Book the real thing</a></div>
     </div>
+    <div class="padBtns"><button type="button" class="btn btn-line" id="again">Start over</button></div>
   </div>
 </section>
 
@@ -287,13 +281,30 @@ const through=el=>{const r=el.getBoundingClientRect(),run=el.offsetHeight-innerH
 
 // hero film: your scroll moves it frame by frame. It runs even with reduced motion on, because you drive it (nothing moves by itself).
 const hero=document.getElementById('hero'),film=document.getElementById('film'),scenes=[...hero.querySelectorAll('.scene')],ticks=[...hero.querySelectorAll('.ticks b')],cue=document.getElementById('cue');
-film.src=matchMedia('(orientation: portrait)').matches?film.dataset.port:film.dataset.land;
-film.addEventListener('loadeddata',()=>{film.currentTime=0;film.classList.add('ready');},{once:true});
-// iOS paints seeked frames only after the video has been started once
-addEventListener('touchstart',()=>{const t=film.currentTime;const p=film.play();film.pause();if(p&&p.catch)p.catch(()=>{});film.currentTime=t;},{once:true,passive:true});
-let want=0,shown=0,seeking=false;
-const seek=()=>{seeking=false;if(!film.duration)return;shown+=(want-shown)*.25;if(Math.abs(want-shown)<.002)shown=want;
-  const t=Math.min(film.duration-.05,shown*film.duration);if(Math.abs(film.currentTime-t)>.03)film.currentTime=t;if(shown!==want&&!seeking){seeking=true;requestAnimationFrame(seek);}};
+// Phones (portrait): the same film as desktop, cut to a tall frame and painted picture by picture on a canvas
+// (seeking a video on phones is choppy). Desktop: the video, downloaded whole first so every seek is instant.
+// A loading screen stays up until the film is fully in, then the page opens.
+const loader=document.getElementById('loader'),lbar=document.getElementById('lbar');
+let loaded=false;const progress=k=>{lbar.style.transform=`scaleX(${clamp(k)})`;};
+const open=()=>{if(loaded)return;loaded=true;progress(1);setTimeout(()=>{loader.classList.add('done');document.body.classList.remove('loading');},250);};
+setTimeout(open,15000);   // never hold the page longer than this on a slow connection
+let want=0,shown=0,seeking=false,seek;
+if(matchMedia('(orientation: portrait)').matches){
+  const N=119,frames=[],cv=document.createElement('canvas'),ctx=cv.getContext('2d');cv.width=420;cv.height=720;cv.className='film';cv.id='seq';cv.setAttribute('aria-hidden','true');
+  film.replaceWith(cv);let drawn=-1,got=0;
+  const paint=i=>{if(i===drawn||!frames[i]?.ok)return;ctx.drawImage(frames[i],0,0,420,720);drawn=i;cv.classList.add('ready');};
+  for(let i=0;i<N;i++){const im=new Image();im.decoding='async';im.onload=im.onerror=()=>{im.ok=im.naturalWidth>0;got++;progress(got/N);if(i===0)paint(0);if(got===N)open();};im.src=`media/seq/${String(i+1).padStart(3,'0')}.webp`;frames.push(im);}
+  seek=()=>{seeking=false;shown+=(want-shown)*.2;if(Math.abs(want-shown)<.0008)shown=want;let i=Math.round(shown*(N-1));while(i>0&&!frames[i].ok)i--;paint(i);if(shown!==want){seeking=true;requestAnimationFrame(seek);}};
+}else{
+  const use=src=>{film.src=src;film.addEventListener('loadeddata',()=>{film.currentTime=0;film.classList.add('ready');open();},{once:true});};
+  (async()=>{try{const r=await fetch(film.dataset.land),total=+r.headers.get('content-length')||4.9e6,rd=r.body.getReader(),parts=[];let n=0;
+    for(;;){const{done,value}=await rd.read();if(done)break;parts.push(value);n+=value.length;progress(n/total*.95);}
+    use(URL.createObjectURL(new Blob(parts,{type:'video/mp4'})));}catch(_){use(film.dataset.land);}})();
+  // iOS paints seeked frames only after the video has been started once
+  addEventListener('touchstart',()=>{const t=film.currentTime;const p=film.play();film.pause();if(p&&p.catch)p.catch(()=>{});film.currentTime=t;},{once:true,passive:true});
+  seek=()=>{seeking=false;if(!film.duration)return;shown+=(want-shown)*.25;if(Math.abs(want-shown)<.002)shown=want;
+    const t=Math.min(film.duration-.05,shown*film.duration);if(Math.abs(film.currentTime-t)>.03)film.currentTime=t;if(shown!==want){seeking=true;requestAnimationFrame(seek);}};
+}
 
 const band=document.getElementById('band');
 band.innerHTML=('<span>Realism <em>&amp;</em> Freehand <em>&amp;</em> Fineline <em>&amp;</em> Cover-ups <em>&amp;</em> Sleeves <em>&amp;</em> Custom <em>&amp;</em> </span>').repeat(4);
@@ -337,37 +348,16 @@ requestAnimationFrame(frame);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
 
-// sketch pad: a real coil machine under your finger, the phone buzzes while it's down
-{const pad=document.getElementById('pad'),cv=document.getElementById('padCanvas'),g=cv.getContext('2d'),mach=document.getElementById('mach');
- const skin=()=>{const r=pad.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);cv.width=r.width*d;cv.height=r.height*d;g.setTransform(d,0,0,d,0,0);
-   const gr=g.createRadialGradient(r.width*.45,r.height*.4,10,r.width*.5,r.height*.5,r.width*.75);gr.addColorStop(0,'#e7c3a6');gr.addColorStop(1,'#c99a7c');g.fillStyle=gr;g.fillRect(0,0,r.width,r.height);
-   for(let i=0;i<1600;i++){g.fillStyle=`rgba(120,70,45,${Math.random()*.06})`;g.fillRect(Math.random()*r.width,Math.random()*r.height,1.2,1.2);}};
- skin();let last=null;
- const pt=e=>{const r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top];};
- const place=([x,y])=>{mach.style.transform=`translate(${x-1.4}px,${y-113.8}px) rotate(8deg)`;};   // needle tip of the 110px-wide photo
- const hap=document.createElement('label');hap.setAttribute('aria-hidden','true');hap.style.cssText='position:fixed;left:-99px;top:0;opacity:0;pointer-events:none';hap.innerHTML='<input type="checkbox" switch tabindex="-1">';document.body.appendChild(hap);
- const canVibe=typeof navigator.vibrate==='function',pattern=Array.from({length:60},(_,i)=>i%2?6:24);let buzzT=0,tickT=0;
- const buzzOn=()=>{if(canVibe){navigator.vibrate(pattern);clearInterval(buzzT);buzzT=setInterval(()=>navigator.vibrate(pattern),1400);}else{hap.click();clearInterval(tickT);tickT=setInterval(()=>hap.click(),90);}};
- const buzzOff=()=>{clearInterval(buzzT);clearInterval(tickT);if(canVibe)navigator.vibrate(0);};
- cv.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')pad.classList.add('hover');place(pt(e));});
- cv.addEventListener('pointerleave',()=>pad.classList.remove('hover'));
- cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);last=pt(e);place(last);pad.classList.add('used','inking');buzzOn();});
- cv.addEventListener('pointermove',e=>{const p=pt(e);place(p);if(!last)return;const j=()=>(Math.random()-.5)*.7;
-   g.strokeStyle='rgba(18,16,20,.93)';g.lineCap=g.lineJoin='round';g.lineWidth=2.8+Math.random()*.8;g.shadowColor='rgba(20,20,40,.35)';g.shadowBlur=2;
-   g.beginPath();g.moveTo(last[0],last[1]);g.lineTo(p[0]+j(),p[1]+j());g.stroke();last=p;});
- const up=()=>{last=null;pad.classList.remove('inking');buzzOff();};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
- document.getElementById('padClear').onclick=()=>{skin();pad.classList.remove('used');};
- document.getElementById('padSave').onclick=()=>cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-tattoo-sketch.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000);});
- let w=pad.clientWidth;addEventListener('resize',()=>{if(Math.abs(pad.clientWidth-w)>40){w=pad.clientWidth;skin();pad.classList.remove('used');}});}
 </script>
 
 <script type="module">
-// 3D: a coil tattoo machine inks a peony onto a curved patch of skin, stroke by stroke. Drag to turn it.
-// Loads only when the box is near the screen and renders only while visible; phones get a smaller ink texture.
-const stage=document.getElementById('stage'),box=document.getElementById('stageBox');
+// Ink it with Carl: a 3D coil machine and the visitor take turns on one simple peony. The machine lines a part slowly;
+// the next part shows as a purple stencil to trace; lifting the finger hands it back to the machine.
+// Loads only when the box is near the screen and renders only while it's on screen.
+const stage=document.getElementById('stage'),box=document.getElementById('stageBox'),turnText=document.getElementById('turnText'),turnStep=document.getElementById('turnStep');
 await new Promise(ok=>{const o=new IntersectionObserver(es=>{if(es[0].isIntersecting){o.disconnect();ok();}},{rootMargin:'400px'});o.observe(stage);});
 const THREE=await import('./media/three.module.min.js');
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,small=matchMedia('(max-width: 700px)').matches;
+const small=matchMedia('(max-width: 700px)').matches;
 const W=()=>stage.clientWidth,H=()=>stage.clientHeight;
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
 renderer.setPixelRatio(Math.min(devicePixelRatio,small?1.5:2));renderer.setSize(W(),H());
@@ -375,27 +365,28 @@ renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFi
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 stage.appendChild(renderer.domElement);
 const scene=new THREE.Scene();
-const cam=new THREE.PerspectiveCamera(32,W()/H(),.1,80);
-const frame=()=>{cam.aspect=W()/H();cam.position.set(0,7.2,6.4);cam.lookAt(0,0,.2);cam.updateProjectionMatrix();};frame();
-scene.add(new THREE.HemisphereLight(0xfff0e0,0x1a1418,.55));
-const key=new THREE.SpotLight(0xffe2c4,140,40,.55,.6,1.6);key.position.set(-4,9,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.0004;scene.add(key);
-const rim=new THREE.DirectionalLight(0x9fb8ff,1.2);rim.position.set(5,3,-6);scene.add(rim);
+const cam=new THREE.PerspectiveCamera(30,W()/H(),.1,80);
+// look down at the skin so tracing is easy; a square box (phone) needs to stand a little further back
+const frame=()=>{cam.aspect=W()/H();const far=cam.aspect<1.2?1.22:1;cam.position.set(0,8.4*far,3.6*far);cam.lookAt(0,0,.15);cam.updateProjectionMatrix();};frame();
+scene.add(new THREE.HemisphereLight(0xfff0e0,0x1a1418,.6));
+const key=new THREE.SpotLight(0xffe2c4,140,40,.6,.6,1.6);key.position.set(-4,9,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.0004;scene.add(key);
+const rim=new THREE.DirectionalLight(0x9fb8ff,1.1);rim.position.set(5,3,-6);scene.add(rim);
 
+// skin: a gently curved surface, its canvas is where the ink goes
 const S=small?1024:2048,K=S/2048,cv=document.createElement('canvas');cv.width=cv.height=S;const g=cv.getContext('2d');
-const paintSkin=()=>{g.shadowBlur=0;const gr=g.createRadialGradient(S*.5,S*.5,S*.05,S*.5,S*.5,S*.62);gr.addColorStop(0,'#e2b998');gr.addColorStop(.45,'#c9967a');gr.addColorStop(.8,'#5a3f35');gr.addColorStop(1,'#141215');g.fillStyle=gr;g.fillRect(0,0,S,S);
-  for(let i=0;i<26000*K*K;i++){g.fillStyle=`rgba(110,60,40,${Math.random()*.05})`;g.fillRect(Math.random()*S,Math.random()*S,2*K,2*K);}
-  for(let i=0;i<110;i++){g.strokeStyle=`rgba(120,70,50,${.025+Math.random()*.03})`;g.lineWidth=1.5*K;g.beginPath();const y=Math.random()*S;g.moveTo(0,y);g.bezierCurveTo(S*.3,y+30*K,S*.7,y-30*K,S,y+15*K);g.stroke();}};
-paintSkin();
+const paintSkin=()=>{g.shadowBlur=0;const gr=g.createRadialGradient(S*.5,S*.5,S*.05,S*.5,S*.5,S*.62);gr.addColorStop(0,'#e6bf9f');gr.addColorStop(.5,'#cf9d80');gr.addColorStop(.85,'#5a3f35');gr.addColorStop(1,'#141215');g.fillStyle=gr;g.fillRect(0,0,S,S);
+  for(let i=0;i<26000*K*K;i++){g.fillStyle=`rgba(110,60,40,${Math.random()*.05})`;g.fillRect(Math.random()*S,Math.random()*S,2*K,2*K);}};
 const tex=new THREE.CanvasTexture(cv);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;
 const SW=14,SH=14;const sg=new THREE.PlaneGeometry(SW,SH,96,96);
 const bend=x=>-(x*x)*.03;
 {const p=sg.attributes.position;for(let i=0;i<p.count;i++)p.setZ(i,bend(p.getX(i)));sg.computeVertexNormals();}
 const skin=new THREE.Mesh(sg,new THREE.MeshStandardMaterial({map:tex,roughness:.62,metalness:0}));
-skin.rotation.x=-Math.PI/2;skin.receiveShadow=true;
-const rig=new THREE.Group();rig.add(skin);scene.add(rig);
-const D=5.8,toUV=([x,y])=>[.5+(x-.5)*D/SW,.5+(y-.5)*D/SH];
+skin.rotation.x=-Math.PI/2;skin.receiveShadow=true;scene.add(skin);
+// the design lives in a 0..1 box, D units across, in the middle of the skin
+const D=8.4,toUV=([x,y])=>[.5+(x-.5)*D/SW,.5+(y-.5)*D/SH];
 const onSkin=(p,lift=0)=>{const[u,v]=toUV(p),x=(u-.5)*SW,y=(v-.5)*SH;return new THREE.Vector3(x,bend(x)+lift,-y);};
 
+// the machine: a classic coil machine, built along +Y with the needle tip at the origin
 const pen=new THREE.Group();
 const steel=new THREE.MeshStandardMaterial({color:0xb9bcc2,roughness:.25,metalness:1});
 const dark=new THREE.MeshStandardMaterial({color:0x1b1a1e,roughness:.35,metalness:.8});
@@ -416,54 +407,74 @@ cube(1.5,.08,.24,.85,3.48,steel);cube(.5,.03,.2,1.35,3.55,steel);
 cyl(.035,.035,.55,3.5,brass,1.05,12);cube(.1,.32,.16,1.2,3.75,brass);
 cyl(.03,.03,.3,2.3,steel,1.62,10);
 const cord=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(1.62,2.6,0),new THREE.Vector3(1.9,2.1,.3),new THREE.Vector3(2.8,2.6,1.2),new THREE.Vector3(4.2,3.4,2.4)]),40,.03,8),rubber);cord.castShadow=true;pen.add(cord);
-pen.scale.setScalar(.62);rig.add(pen);
-const TILT=new THREE.Euler(-.42,-.5,-.36,'YXZ');
+pen.scale.setScalar(.6);scene.add(pen);
+const TILT=new THREE.Euler(-.3,-.5,-.3,'YXZ');
 
-const strokes=[];const C=[.5,.54];
-const petal=(a0,a1,r0,r1,n=30)=>{const p=[];for(let i=0;i<=n;i++){const t=i/n,a=a0+(a1-a0)*t,swell=Math.pow(Math.sin(Math.PI*t),.55),notch=.012*Math.exp(-Math.pow((t-.5)/.07,2)),ruffle=.018*Math.sin(t*Math.PI*7)*swell;
-  const r=r0+(r1-r0)*swell-notch*(r1-r0)*3+ruffle*(r1-r0)*3;p.push([C[0]+Math.cos(a)*r,C[1]+Math.sin(a)*r*.9]);}return p;};
-[[4,.0,.08,.0],[5,.04,.15,.6],[6,.09,.23,.15],[7,.15,.31,.45]].forEach(([n,r0,r1,off])=>{for(let k=0;k<n;k++){const a0=off+k/n*Math.PI*2,w=Math.PI*2/n*1.12;strokes.push(petal(a0,a0+w,r0,r1));
-  if(r1>.15){const mid=a0+w/2,q=[];for(let i=0;i<=8;i++){const t=i/8,r=r0+(r1-r0)*(.35+.4*t);q.push([C[0]+Math.cos(mid+.05*Math.sin(t*3))*r,C[1]+Math.sin(mid)*r*.9]);}strokes.push(q);}}});
-const leaf=(ang,len)=>{const base=[C[0]+Math.cos(ang)*.29,C[1]+Math.sin(ang)*.27],tip=[base[0]+Math.cos(ang)*len,base[1]+Math.sin(ang)*len],nx=-Math.sin(ang)*.055,ny=Math.cos(ang)*.055,s1=[],s2=[],mid=[];
-  for(let i=0;i<=22;i++){const t=i/22,w=Math.sin(Math.PI*Math.pow(t,.8)),x=base[0]+(tip[0]-base[0])*t,y=base[1]+(tip[1]-base[1])*t;s1.push([x+nx*w,y+ny*w]);s2.push([x-nx*w,y-ny*w]);mid.push([x,y]);}
-  strokes.push(s1,s2,mid.slice(1,19));};
-leaf(-1.0,.17);leaf(-2.25,.15);leaf(.35,.12);
-console.assert(strokes.every(s=>s.every(([x,y])=>x>0&&x<1&&y>0&&y<1)),'design stays inside its box');
+// the design: a simple peony in four parts: centre (machine), middle petals (you), outer petals (machine), leaves (you)
+const C=[.5,.53];
+const petal=(a0,a1,r0,r1,n=26)=>{const p=[];for(let i=0;i<=n;i++){const t=i/n,a=a0+(a1-a0)*t,swell=Math.pow(Math.sin(Math.PI*t),.6);p.push([C[0]+Math.cos(a)*(r0+(r1-r0)*swell),C[1]+Math.sin(a)*(r0+(r1-r0)*swell)*.9]);}return p;};
+const ring=(n,r0,r1,off)=>Array.from({length:n},(_,k)=>{const a0=off+k/n*Math.PI*2;return petal(a0,a0+Math.PI*2/n*1.1,r0,r1);});
+const leaf=(ang,len)=>{const base=[C[0]+Math.cos(ang)*.33,C[1]+Math.sin(ang)*.3],tip=[base[0]+Math.cos(ang)*len,base[1]+Math.sin(ang)*len],nx=-Math.sin(ang)*.05,ny=Math.cos(ang)*.05,s1=[],s2=[];
+  for(let i=0;i<=20;i++){const t=i/20,w=Math.sin(Math.PI*Math.pow(t,.8)),x=base[0]+(tip[0]-base[0])*t,y=base[1]+(tip[1]-base[1])*t;s1.push([x+nx*w,y+ny*w]);s2.push([x-nx*w,y-ny*w]);}return[s1,s2];};
+const parts=[
+  {who:'carl',say:'Carl lines the centre',strokes:[...ring(4,0,.08,0),...ring(5,.05,.16,.6)]},
+  {who:'you',say:'Your turn: trace the purple petals',strokes:ring(6,.11,.25,.15)},
+  {who:'carl',say:'Carl adds the outer petals',strokes:ring(7,.17,.33,.45)},
+  {who:'you',say:'Your turn: trace the leaves',strokes:[...leaf(-1.0,.14),...leaf(-2.2,.13),...leaf(.4,.11)]}];
+console.assert(parts.every(p=>p.strokes.every(s=>s.every(([x,y])=>x>0&&x<1&&y>0&&y<1))),'design stays inside its box');
 
 const px=p=>{const[u,v]=toUV(p);return[u*S,(1-v)*S];};
-const INK=4.2*K;
-const inkSeg=(a,b,w)=>{const[x0,y0]=px(a),[x1,y1]=px(b);g.strokeStyle='rgba(16,14,20,.93)';g.lineWidth=w;g.lineCap=g.lineJoin='round';g.shadowColor='rgba(30,30,60,.45)';g.shadowBlur=3*K;g.beginPath();g.moveTo(x0,y0);g.lineTo(x1,y1);g.stroke();};
-let si=0,pi=0,done=0,hold=0,lift=0;
-const drawAll=()=>{paintSkin();strokes.forEach(s=>{for(let i=1;i<s.length;i++)inkSeg(s[i-1],s[i],INK);});tex.needsUpdate=true;};
+const line=(a,b,style,w,dash)=>{g.save();g.strokeStyle=style;g.lineWidth=w;g.lineCap=g.lineJoin='round';if(dash)g.setLineDash(dash);else{g.shadowColor='rgba(30,30,60,.45)';g.shadowBlur=3*K;}g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.stroke();g.restore();};
+const INK='rgba(16,14,20,.93)',INKW=5*K;
+const guide=s=>{g.save();g.strokeStyle='rgba(91,63,196,.85)';g.lineWidth=4*K;g.setLineDash([14*K,10*K]);g.lineCap='round';g.beginPath();s.forEach(([x,y],i)=>{const[a,b]=px([x,y]);i?g.lineTo(a,b):g.moveTo(a,b);});g.stroke();g.restore();};
 
-let yaw=0,vel=0,down=false,lx=0;
-stage.style.touchAction='pan-y';
-stage.addEventListener('pointerdown',e=>{down=true;lx=e.clientX;stage.setPointerCapture(e.pointerId);box.classList.add('touched');});
-stage.addEventListener('pointermove',e=>{if(!down)return;const d=(e.clientX-lx)/W()*3;yaw+=d;vel=d;lx=e.clientX;});
-const up=()=>down=false;stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);
+// buzz while the visitor inks. Long steady pulses: very short ones are ignored by many Android motors.
+const hap=document.createElement('label');hap.setAttribute('aria-hidden','true');hap.style.cssText='position:fixed;left:-99px;top:0;opacity:0;pointer-events:none';hap.innerHTML='<input type="checkbox" switch tabindex="-1">';document.body.appendChild(hap);
+const canVibe=typeof navigator.vibrate==='function';let buzzT=0;
+const buzzOn=()=>{clearInterval(buzzT);if(canVibe){navigator.vibrate(400);buzzT=setInterval(()=>navigator.vibrate(400),350);}else{hap.click();buzzT=setInterval(()=>hap.click(),90);}};
+const buzzOff=()=>{clearInterval(buzzT);if(canVibe)navigator.vibrate(0);};
+
+// turns
+let mode='wait',pi=0,si=0,step=0,acc=0,lift=0,pause=0,inked=0;
+const SPEED=38;   // points per second: slow enough to follow
+const say=(t,n)=>{turnText.textContent=t;turnStep.textContent=n;};
+const start=()=>{const P=parts[step];box.classList.remove('yours');
+  if(!P){mode='over';box.classList.add('over');say('Finished: your peony','');return;}
+  mode=P.who;si=pi=0;acc=0;inked=0;say(P.say,`${step+1} / ${parts.length}`);
+  if(mode==='you'){P.strokes.forEach(guide);tex.needsUpdate=true;box.classList.add('yours');}};
+const reset=()=>{buzzOff();paintSkin();tex.needsUpdate=true;step=0;box.classList.remove('over');start();};
+paintSkin();tex.needsUpdate=true;say('Get ready','');
+document.getElementById('again').onclick=reset;
+
+// the visitor's ink: where the finger meets the skin
+const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+const hit=e=>{const r=renderer.domElement.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,cam);return ray.intersectObject(skin)[0]||null;};
+let down=false,lastPx=null,hover=null;
+const uvPx=h=>[h.uv.x*S,(1-h.uv.y)*S];
+stage.addEventListener('pointerdown',e=>{if(mode!=='you')return;const h=hit(e);if(!h)return;e.preventDefault();down=true;stage.setPointerCapture(e.pointerId);lastPx=uvPx(h);hover=h.point;buzzOn();});
+stage.addEventListener('pointermove',e=>{if(mode!=='you')return;const h=hit(e);hover=h?h.point:null;if(!down||!h)return;const p=uvPx(h);
+  line(lastPx,[p[0]+(Math.random()-.5)*K,p[1]+(Math.random()-.5)*K],INK,INKW);inked+=Math.hypot(p[0]-lastPx[0],p[1]-lastPx[1]);lastPx=p;tex.needsUpdate=true;});
+const up=()=>{if(!down)return;down=false;buzzOff();if(mode==='you'&&inked>150*K){step++;pause=.6;mode='hand';}};
+stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);
+stage.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'&&!down)hover=null;});
 addEventListener('resize',()=>{renderer.setSize(W(),H());frame();});
-let visible=true;new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(stage);
+let visible=false;new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&mode==='wait'){pause=.8;mode='hand';}},{threshold:.4}).observe(stage);
 
-const clock=new THREE.Clock(),tipW=new THREE.Vector3(),SPEED=reduce?1e9:150;
-if(reduce){drawAll();done=1;}
-let acc=0;
+const clock=new THREE.Clock(),tipW=new THREE.Vector3(),REST=onSkin([1.08,.2],1.2);tipW.copy(REST);
 renderer.setAnimationLoop(()=>{
   const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
   if(!visible)return;
-  if(!down){yaw+=vel;vel*=.92;yaw*=.985;}
-  rig.rotation.y=yaw+(reduce?0:Math.sin(t*.25)*.12);
-  let target;
-  if(!done){acc+=dt*SPEED;let moved=false;
-    while(acc>=1&&si<strokes.length){const s=strokes[si];if(pi>0){inkSeg(s[pi-1],s[pi],INK);moved=true;}pi++;acc-=1;if(pi>=s.length){si++;pi=0;lift=1;}}
-    if(moved)tex.needsUpdate=true;
-    if(si>=strokes.length){done=1;hold=0;}
-    const s=strokes[Math.min(si,strokes.length-1)],p=s[Math.min(pi,s.length-1)];
-    lift=Math.max(0,lift-dt*4);target=onSkin(p,.03+lift*.5);
-  }else{hold+=dt;target=onSkin([1.12,.25],1.1);
-    if(!reduce&&hold>5){si=0;pi=0;done=0;acc=0;paintSkin();tex.needsUpdate=true;}}
-  tipW.lerp(target,Math.min(1,dt*(done?2:18)));
+  let target=REST,buzz=false;
+  if(mode==='hand'){pause-=dt;if(pause<=0)start();}
+  else if(mode==='carl'){const P=parts[step];acc+=dt*SPEED;
+    while(acc>=1&&si<P.strokes.length){const s=P.strokes[si];if(pi>0)line(px(s[pi-1]),px(s[pi]),INK,INKW);pi++;acc-=1;if(pi>=s.length){si++;pi=0;lift=1;}}
+    tex.needsUpdate=true;
+    if(si>=P.strokes.length){step++;pause=.9;mode='hand';}
+    else{const s=P.strokes[si];target=onSkin(s[Math.min(pi,s.length-1)],.03+lift*.5);lift=Math.max(0,lift-dt*3);buzz=lift<.1;}}
+  else if(mode==='you'&&hover){target=hover.clone();target.y+=down?.03:.45;buzz=down;}
+  tipW.lerp(target,Math.min(1,dt*(mode==='carl'||down?16:5)));
   pen.position.copy(tipW);pen.rotation.copy(TILT);
-  if(!done&&!reduce){pen.position.x+=(Math.random()-.5)*.006;needle.position.y=-.02+Math.sin(t*180)*.02;}
+  if(buzz){pen.position.x+=(Math.random()-.5)*.006;needle.position.y=-.02+Math.sin(t*180)*.02;}
   renderer.render(scene,cam);
 });
 stage.classList.add('live');
