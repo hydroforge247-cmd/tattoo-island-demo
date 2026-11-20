@@ -91,19 +91,37 @@ section{position:relative}
 .paper .kicker{color:#b01c15}
 .paper .lead{color:#3a3633}
 .blot{clip-path:circle(var(--r,0%) at 50% 0%)}
-.stageBox{position:relative;max-width:640px;margin:36px auto 0;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(70% 60% at 50% 45%,#2a2420,#141215 70%);border:2px solid #151416;box-shadow:12px 12px 0 #151416}
-#stage{position:absolute;inset:0}
-#stage canvas{display:block;width:100%!important;height:100%!important;opacity:0;transition:opacity 1s}
-#stage.live canvas{opacity:1}
-@media(max-width:700px){.stageBox{aspect-ratio:1/1;width:86%}}
-#stage{touch-action:pan-y}.stageBox.yours #stage{touch-action:none;cursor:crosshair}
-.turn{position:absolute;left:12px;top:12px;right:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;pointer-events:none}
-.turn b{font:700 11.5px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:8px 11px;background:rgba(10,10,11,.8);color:#fff;transition:background .3s}
-.stageBox.yours .turn b{background:var(--stencil)}
-.turn i{font:700 11px Inter,sans-serif;font-style:normal;letter-spacing:.16em;color:rgba(242,239,233,.8)}
-.finish{position:absolute;inset:auto 0 0;padding:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;background:linear-gradient(0deg,rgba(10,10,11,.85),transparent);opacity:0;pointer-events:none;transition:opacity .5s}
-.stageBox.over .finish{opacity:1;pointer-events:auto}
-.padBtns{justify-content:center;display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.tryGrid{display:grid;gap:30px;align-items:center}
+@media(min-width:900px){.tryGrid{grid-template-columns:1fr 1fr}}
+.who{display:inline-flex;border:2px solid #151416;margin-bottom:14px}
+.who button{min-height:44px;padding:0 22px;font:700 13px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:0;cursor:pointer;color:#151416}
+.who button.on{background:#151416;color:var(--paper)}
+.bodyBox{position:relative;aspect-ratio:4/5;max-width:500px;overflow:hidden;background:radial-gradient(80% 70% at 50% 42%,#2b2623,#121012 75%);border:2px solid #151416;box-shadow:12px 12px 0 #151416}
+#bodyStage{position:absolute;inset:0;touch-action:pan-y;cursor:grab}
+.bodyBox.ink #bodyStage{touch-action:none;cursor:crosshair}
+@media(hover:hover){.bodyBox.ink #bodyStage{cursor:none}}
+#bodyStage canvas{display:block;width:100%!important;height:100%!important}
+.bodyHint{position:absolute;left:12px;right:12px;top:12px;margin:0;font:700 11px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none}
+.turnBtns{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:12px}
+.turnBtns button{width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);background:rgba(10,10,11,.5);color:#fff;font-size:22px;cursor:pointer}
+.bodyBox.ink .turnBtns{display:none}
+.bodyTools{position:absolute;left:0;right:0;bottom:0;padding:10px;background:rgba(10,10,11,.86);display:none;gap:8px;flex-direction:column}
+.bodyBox.ink .bodyTools{display:flex}
+.toolRow{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.toolRow span{font:700 11px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#cfc8bf;margin-right:2px}
+.toolRow button{min-height:44px;flex:1;padding:0 8px;font:700 12px Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);cursor:pointer}
+.toolRow button.on{background:var(--stencil);border-color:var(--stencil)}
+.toolRow .done{background:var(--paper);color:#151416;border-color:var(--paper);flex:1.4}
+.mach{position:absolute;left:0;top:0;width:90px;height:auto;pointer-events:none;opacity:0;transition:opacity .2s;transform-origin:1.1px 92px;filter:drop-shadow(8px 12px 7px rgba(0,0,0,.5));z-index:2}
+.bodyBox.ink.hover .mach,.bodyBox.ink.drawing .mach{opacity:1}
+.bodyBox.drawing .mach{animation:buzz .045s linear infinite}
+@keyframes buzz{50%{margin-left:.7px;margin-top:-.6px}}
+.pieces{display:flex;gap:10px;overflow-x:auto;margin-top:22px;max-width:500px}
+.pieces:empty{display:none}
+.saved{flex:0 0 100px;border:2px solid #151416;background:#fff;padding:0;cursor:pointer;text-align:left}
+.saved img{width:100%;aspect-ratio:1;object-fit:cover}
+.saved span{display:block;padding:5px 7px;font:700 10.5px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#151416}
+.padBtns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
 .paper .btn-line{color:#151416}
 
 .list{margin-top:34px;border-top:2px solid var(--paper)}
@@ -163,7 +181,7 @@ body.loading{overflow:hidden}
 <div class="pitch"><span class="lg">A website preview made for Tattoo Island by </span><span class="sm">Website preview by </span><b>NFC Software Solutions</b></div>
 <header><div class="wrap nav">
   <a class="brand" href="#top"><img src="media/logo.webp" alt="" width="38" height="38">Tattoo Island</a>
-  <nav class="links" aria-label="Sections"><a href="#work">Work</a><a href="#needle">Needle</a><a href="#artists">Artists</a><a href="#book">Book</a><a href="#visit">Visit</a></nav>
+  <nav class="links" aria-label="Sections"><a href="#work">Work</a><a href="#tryon">Try it on</a><a href="#artists">Artists</a><a href="#book">Book</a><a href="#visit">Visit</a></nav>
   <a class="navBook" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener">Book</a>
 </div></header>
 
@@ -212,16 +230,28 @@ body.loading{overflow:hidden}
   </div>
 </section>
 
-<section class="paper pad-y blot" id="needle">
-  <div class="wrap">
-    <span class="kicker reveal">The needle</span>
-    <h2 class="display h2 reveal" style="margin-top:10px">Ink it <span class="serif">with</span> Carl</h2>
-    <p class="lead reveal">The machine lines part of a peony, slowly. Then it's your turn: trace the purple stencil with your finger or mouse. Lift off, and the machine carries on.</p>
-    <div class="stageBox" id="stageBox"><div id="stage" role="img" aria-label="A 3D coil tattoo machine and you take turns inking a peony onto skin"></div>
-      <div class="turn" aria-live="polite"><b id="turnText">Get ready</b><i id="turnStep"></i></div>
-      <div class="finish"><a class="btn btn-wa" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Book the real thing</a></div>
+<section class="paper pad-y blot" id="tryon">
+  <div class="wrap tryGrid">
+    <div>
+      <span class="kicker reveal">Try it on</span>
+      <h2 class="display h2 reveal" style="margin-top:10px">Plan <span class="serif">your</span> placement</h2>
+      <p class="lead reveal">Turn the body and tap where you want ink. Draw it with the machine or drop on a design, then zoom out and do the next spot. Save your pieces to show Carl.</p>
     </div>
-    <div class="padBtns"><button type="button" class="btn btn-line" id="again">Start over</button></div>
+    <div>
+      <div class="who" role="group" aria-label="Choose a body"><button type="button" class="on" data-who="m" aria-pressed="true">Him</button><button type="button" data-who="f" aria-pressed="false">Her</button></div>
+      <div class="bodyBox" id="bodyBox">
+        <div id="bodyStage" role="img" aria-label="A 3D body you can turn and tattoo"></div>
+        <img class="mach" id="bodyMach" src="media/machine.webp" alt="" aria-hidden="true">
+        <p class="bodyHint" id="bodyHint">Drag to turn · tap a spot to tattoo it</p>
+        <div class="turnBtns"><button type="button" id="turnL" aria-label="Turn the body left">&#8634;</button><button type="button" id="turnR" aria-label="Turn the body right">&#8635;</button></div>
+        <div class="bodyTools" id="bodyTools">
+          <div class="toolRow" role="group" aria-label="Tool"><button type="button" data-tool="draw" class="on">Draw</button><button type="button" data-tool="peony">Peony</button><button type="button" data-tool="rose">Rose</button><button type="button" data-tool="heart">Heart</button><button type="button" data-tool="star">Star</button></div>
+          <div class="toolRow"><span>Size</span><button type="button" data-size=".05">S</button><button type="button" data-size=".08" class="on">M</button><button type="button" data-size=".12">L</button><button type="button" class="done" id="bodyDone">Done</button></div>
+        </div>
+      </div>
+      <div class="pieces" id="pieces" aria-live="polite"></div>
+      <div class="padBtns"><button type="button" class="btn btn-red" id="saveAll" disabled>Save all</button><button type="button" class="btn btn-line" id="clearAll">Start over</button></div>
+    </div>
   </div>
 </section>
 
@@ -293,9 +323,14 @@ const open=()=>{if(loaded)return;loaded=true;progress(1);setTimeout(()=>{loader.
 setTimeout(open,15000);   // never hold the page longer than this on a slow connection
 let want=0,shown=0,seeking=false,seek;
 if(matchMedia('(orientation: portrait)').matches){
-  const N=119,frames=[],cv=document.createElement('canvas'),ctx=cv.getContext('2d');cv.width=420;cv.height=720;cv.className='film';cv.id='seq';cv.setAttribute('aria-hidden','true');
+  const N=119,frames=[],cv=document.createElement('canvas'),ctx=cv.getContext('2d');cv.className='film';cv.id='seq';cv.setAttribute('aria-hidden','true');
   film.replaceWith(cv);let drawn=-1,got=0;
-  const paint=i=>{if(i===drawn||!frames[i]?.ok)return;ctx.drawImage(frames[i],0,0,420,720);drawn=i;cv.classList.add('ready');};
+  // zoomed out a little from a full-height fit (sharper): the frame sits on the bottom edge, the dark top fades into black
+  const Z=.84,fit=()=>{const d=Math.min(devicePixelRatio||1,2);cv.width=Math.round(cv.clientWidth*d);cv.height=Math.round(cv.clientHeight*d);drawn=-1;};
+  const paint=i=>{if(i===drawn||!frames[i]?.ok)return;const f=frames[i],w=cv.width,h=cv.height,s=Math.max(w/f.naturalWidth,h/f.naturalHeight)*Z,dw=f.naturalWidth*s,dh=f.naturalHeight*s;
+    ctx.fillStyle='#0a0a0b';ctx.fillRect(0,0,w,h);ctx.imageSmoothingQuality='high';ctx.drawImage(f,(w-dw)/2,h-dh,dw,dh);
+    const gr=ctx.createLinearGradient(0,h-dh,0,h-dh+h*.14);gr.addColorStop(0,'#0a0a0b');gr.addColorStop(1,'rgba(10,10,11,0)');ctx.fillStyle=gr;ctx.fillRect(0,h-dh,w,h*.14);drawn=i;cv.classList.add('ready');};
+  requestAnimationFrame(()=>{fit();paint(Math.round(shown*(N-1)));});addEventListener('resize',()=>{fit();paint(Math.round(shown*(N-1)));});
   for(let i=0;i<N;i++){const im=new Image();im.decoding='async';im.onload=im.onerror=()=>{im.ok=im.naturalWidth>0;got++;progress(got/N);if(i===0)paint(0);if(got===N)open();};im.src=`media/seq/${String(i+1).padStart(3,'0')}.webp`;frames.push(im);}
   seek=()=>{seeking=false;shown+=(want-shown)*.2;if(Math.abs(want-shown)<.0008)shown=want;let i=Math.round(shown*(N-1));while(i>0&&!frames[i].ok)i--;paint(i);if(shown!==want){seeking=true;requestAnimationFrame(seek);}};
 }else{
@@ -354,138 +389,179 @@ document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
 </script>
 
 <script type="module">
-// Ink it with Carl: a 3D coil machine and the visitor take turns on one simple peony. The machine lines a part slowly;
-// the next part shows as a purple stencil to trace; lifting the finger hands it back to the machine.
-// Loads only when the box is near the screen and renders only while it's on screen.
-const stage=document.getElementById('stage'),box=document.getElementById('stageBox'),turnText=document.getElementById('turnText'),turnStep=document.getElementById('turnStep');
-await new Promise(ok=>{const o=new IntersectionObserver(es=>{if(es[0].isIntersecting){o.disconnect();ok();}},{rootMargin:'400px'});o.observe(stage);});
+// Try it on: a man (shorts) and a woman (leggings, sports bra) built in code from smooth lathed shapes. Each skin part has its
+// own canvas texture (skin, then ink, then clothes on top, so ink never shows on fabric). Drag to turn, tap a spot to zoom in,
+// draw with the machine or stamp a flash design, Done zooms out and keeps a close-up. Save one close-up, or a sheet of all.
+const box=document.getElementById('bodyBox'),stage=document.getElementById('bodyStage'),hint=document.getElementById('bodyHint'),mach=document.getElementById('bodyMach'),strip=document.getElementById('pieces'),saveAll=document.getElementById('saveAll');
+await new Promise(ok=>{const o=new IntersectionObserver(es=>{if(es[0].isIntersecting){o.disconnect();ok();}},{rootMargin:'500px'});o.observe(stage);});
 const THREE=await import('./media/three.module.min.js');
-const small=matchMedia('(max-width: 700px)').matches;
+const V=THREE.Vector3,small=matchMedia('(max-width: 700px)').matches;
 const W=()=>stage.clientWidth,H=()=>stage.clientHeight;
-const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
-renderer.setPixelRatio(Math.min(devicePixelRatio,small?1.5:2));renderer.setSize(W(),H());
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true,powerPreference:'low-power'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,small?1.6:2));renderer.setSize(W(),H());
 renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
-renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 stage.appendChild(renderer.domElement);
-const scene=new THREE.Scene();
-const cam=new THREE.PerspectiveCamera(30,W()/H(),.1,80);
-// look down at the skin so tracing is easy; a square box (phone) needs to stand a little further back
-const frame=()=>{cam.aspect=W()/H();const far=cam.aspect<1.2?1.22:1;cam.position.set(0,8.4*far,3.6*far);cam.lookAt(0,0,.15);cam.updateProjectionMatrix();};frame();
-scene.add(new THREE.HemisphereLight(0xfff0e0,0x1a1418,.6));
-const key=new THREE.SpotLight(0xffe2c4,140,40,.6,.6,1.6);key.position.set(-4,9,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.0004;scene.add(key);
-const rim=new THREE.DirectionalLight(0x9fb8ff,1.1);rim.position.set(5,3,-6);scene.add(rim);
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,W()/H(),.05,50);
+const HOME={pos:new V(0,.95,3.5),look:new V(0,.9,0)};
+const look=HOME.look.clone();cam.position.copy(HOME.pos);cam.lookAt(look);
+scene.add(new THREE.HemisphereLight(0xfff4ea,0x2a2024,.75));
+const key=new THREE.DirectionalLight(0xffe8d6,2.1);key.position.set(1.6,2.6,3);scene.add(key);
+const fill=new THREE.DirectionalLight(0xffffff,.6);fill.position.set(-2.2,1.2,2);scene.add(fill);
+const rim=new THREE.DirectionalLight(0x9db6ff,1.3);rim.position.set(0,2,-3);scene.add(rim);
+{const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d'),gr=g.createRadialGradient(64,64,4,64,64,62);gr.addColorStop(0,'rgba(0,0,0,.55)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,128,128);
+ const sh=new THREE.Mesh(new THREE.PlaneGeometry(.9,.6),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));sh.rotation.x=-Math.PI/2;sh.position.y=.002;scene.add(sh);}
 
-// skin: a gently curved surface, its canvas is where the ink goes
-const S=small?1024:2048,K=S/2048,cv=document.createElement('canvas');cv.width=cv.height=S;const g=cv.getContext('2d');
-const paintSkin=()=>{g.shadowBlur=0;const gr=g.createRadialGradient(S*.5,S*.5,S*.05,S*.5,S*.5,S*.62);gr.addColorStop(0,'#e6bf9f');gr.addColorStop(.5,'#cf9d80');gr.addColorStop(.85,'#5a3f35');gr.addColorStop(1,'#141215');g.fillStyle=gr;g.fillRect(0,0,S,S);
-  for(let i=0;i<26000*K*K;i++){g.fillStyle=`rgba(110,60,40,${Math.random()*.05})`;g.fillRect(Math.random()*S,Math.random()*S,2*K,2*K);}};
-const tex=new THREE.CanvasTexture(cv);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;
-const SW=14,SH=14;const sg=new THREE.PlaneGeometry(SW,SH,96,96);
-const bend=x=>-(x*x)*.03;
-{const p=sg.attributes.position;for(let i=0;i<p.count;i++)p.setZ(i,bend(p.getX(i)));sg.computeVertexNormals();}
-const skin=new THREE.Mesh(sg,new THREE.MeshStandardMaterial({map:tex,roughness:.62,metalness:0}));
-skin.rotation.x=-Math.PI/2;skin.receiveShadow=true;scene.add(skin);
-// the design lives in a 0..1 box, D units across, in the middle of the skin
-const D=7.6,toUV=([x,y])=>[.5+(x-.5)*D/SW,.5+(y-.5)*D/SH];
-const onSkin=(p,lift=0)=>{const[u,v]=toUV(p),x=(u-.5)*SW,y=(v-.5)*SH;return new THREE.Vector3(x,bend(x)+lift,-y);};
+// ---- textures: skin + ink + clothes per part
+const T=512;
+const blank=()=>{const c=document.createElement('canvas');c.width=c.height=T;return c;};
+const skinBase=tone=>{const c=blank(),g=c.getContext('2d');g.fillStyle=tone;g.fillRect(0,0,T,T);for(let i=0;i<2600;i++){g.fillStyle=`rgba(110,60,45,${Math.random()*.035})`;g.fillRect(Math.random()*T,Math.random()*T,1.5,1.5);}return c;};
+const compose=p=>{p.g.drawImage(p.base,0,0);p.g.drawImage(p.ink,0,0);p.g.drawImage(p.cl,0,0);p.tex.needsUpdate=true;};
+const band=(g,t0,t1,col)=>{g.fillStyle=col;g.fillRect(0,(1-t1)*T,T,(t1-t0)*T);g.fillStyle='rgba(0,0,0,.28)';if(t1<1)g.fillRect(0,(1-t1)*T,T,4);if(t0>0)g.fillRect(0,(1-t0)*T-4,T,4);};
+const urect=(g,u0,u1,t0,t1,col)=>{g.fillStyle=col;g.fillRect(u0*T,(1-t1)*T,(u1-u0)*T,(t1-t0)*T);};
+const interp=tab=>t=>{for(let i=1;i<tab.length;i++)if(t<=tab[i][0]){const[a,ra]=tab[i-1],[b,rb]=tab[i],k=(t-a)/(b-a),s=k*k*(3-2*k);return ra+(rb-ra)*s;}return tab[tab.length-1][1];};
+const capped=(len,tab)=>{const r=interp(tab);return t=>{const rr=r(t),e=Math.min(t,1-t)*len,c=Math.min(1,e/rr);return rr*Math.sqrt(1-(1-c)*(1-c));};};
+const lathe=(len,rf,n=48,seg=56)=>new THREE.LatheGeometry(Array.from({length:n+1},(_,j)=>new THREE.Vector2(Math.max(.0006,rf(j/n)),j/n*len)),seg);
 
-// the machine: a classic coil machine, built along +Y with the needle tip at the origin
-const pen=new THREE.Group();
-const steel=new THREE.MeshStandardMaterial({color:0xb9bcc2,roughness:.25,metalness:1});
-const dark=new THREE.MeshStandardMaterial({color:0x1b1a1e,roughness:.35,metalness:.8});
-const rubber=new THREE.MeshStandardMaterial({color:0x111012,roughness:.9});
-const brass=new THREE.MeshStandardMaterial({color:0xc39a5f,roughness:.3,metalness:.95});
-const copper=new THREE.MeshStandardMaterial({color:0xb5652e,roughness:.35,metalness:.9});
-const wire=new THREE.MeshStandardMaterial({color:0x7a3d18,roughness:.5,metalness:.7});
-const part=(geo,m,x,y,z=0)=>{const o=new THREE.Mesh(geo,m);o.position.set(x,y,z);o.castShadow=true;pen.add(o);return o;};
-const cyl=(r1,r2,h,y,m,x=0,seg=32)=>part(new THREE.CylinderGeometry(r1,r2,h,seg),m,x,y+h/2);
-const cube=(w,h,d,x,y,m,z=0)=>part(new THREE.BoxGeometry(w,h,d),m,x,y,z);
-const needle=cyl(.012,.004,.45,-.02,steel,0,10);
-cyl(.05,.13,.5,.25,steel);
-cyl(.2,.2,1.05,.75,rubber);for(let i=0;i<9;i++)cyl(.21,.21,.03,.82+i*.11,dark);
-cyl(.09,.09,1.1,1.8,steel);
-cube(.42,.3,.34,.12,2.75,dark);cube(.14,1.5,.32,.38,3.35,dark);cube(1.45,.14,.32,.9,2.62,dark);
-for(const x of [.78,1.28]){cyl(.17,.17,.62,2.69,copper,x);cyl(.18,.18,.06,2.66,dark,x);cyl(.18,.18,.06,3.27,dark,x);for(let i=0;i<4;i++)cyl(.175,.175,.02,2.8+i*.12,wire,x);}
-cube(1.5,.08,.24,.85,3.48,steel);cube(.5,.03,.2,1.35,3.55,steel);
-cyl(.035,.035,.55,3.5,brass,1.05,12);cube(.1,.32,.16,1.2,3.75,brass);
-cyl(.03,.03,.3,2.3,steel,1.62,10);
-const cord=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(1.62,2.6,0),new THREE.Vector3(1.9,2.1,.3),new THREE.Vector3(2.8,2.6,1.2),new THREE.Vector3(4.2,3.4,2.4)]),40,.03,8),rubber);cord.castShadow=true;pen.add(cord);
-pen.scale.setScalar(.6);scene.add(pen);
-const TILT=new THREE.Euler(-.3,-.5,-.3,'YXZ');
+const figures={};
+function makeFigure(fem){
+  const grp=new THREE.Group(),parts=[],k=fem?.94:1,tone=fem?'#e0b195':'#c98f70';
+  const plain=new THREE.MeshStandardMaterial({color:tone,roughness:.6});
+  const shoe=new THREE.MeshStandardMaterial({color:0xece8e2,roughness:.7}),sole=new THREE.MeshStandardMaterial({color:0x2a2a2e,roughness:.8});
+  const hair=new THREE.MeshStandardMaterial({color:fem?0x3b2619:0x22180f,roughness:.85});
+  const fabric=fem?'#1d1b22':'#2a3a52';
+  const add=(name,len,rf,parent,{sx=1,sz=1,y=0,clothes,label}={})=>{
+    const c=blank(),tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=4;
+    const m=new THREE.Mesh(lathe(len,rf),new THREE.MeshStandardMaterial({map:tex,roughness:.58}));m.scale.set(sx,1,sz);m.position.y=y;
+    const p={name,label:label||name,mesh:m,cv:c,g:c.getContext('2d'),base:skinBase(tone),ink:blank(),cl:blank(),tex,len,rf,sx,sz,dirty:false};
+    if(clothes)clothes(p.cl.getContext('2d'));compose(p);m.userData.part=p;parent.add(m);parts.push(p);return m;};
+  // torso, from the crotch up to the base of the neck
+  const tor=fem?[[0,.02],[.04,.13],[.1,.172],[.18,.182],[.32,.148],[.45,.124],[.6,.138],[.72,.15],[.82,.145],[.9,.108],[.96,.065],[1,.05]]
+               :[[0,.02],[.04,.12],[.1,.162],[.2,.168],[.34,.152],[.47,.146],[.62,.168],[.74,.184],[.84,.176],[.91,.128],[.96,.072],[1,.056]];
+  const tsx=fem?1.06:1.1,tsz=fem?.66:.68;
+  add('torso',.67*k,interp(tor),grp,{sx:tsx,sz:tsz,y:.8*k,label:'Torso',clothes:g=>{
+    if(fem){band(g,0,.26,fabric);band(g,.5,.77,fabric);for(const u of [.07,.89,.4,.56])urect(g,u,u+.045,.76,.95,fabric);}
+    else{band(g,0,.2,fabric);g.fillStyle='#f1ede6';g.fillRect(0,(1-.2)*T,T,6);}}});
+  if(fem)for(const s of [-1,1]){const b=new THREE.Mesh(new THREE.SphereGeometry(.062,24,16),new THREE.MeshStandardMaterial({color:fabric,roughness:.8}));b.position.set(s*.066,1.258*k,.088*k);b.scale.set(1,.88,.78);grp.add(b);}
+  add('neck',.15*k,()=>.05*k,grp,{y:1.41*k,label:'Neck'});
+  const head=new THREE.Mesh(new THREE.SphereGeometry(.104,40,28),plain);head.position.y=1.635*k;head.scale.set(.86,1.12,.96);grp.add(head);
+  const cap=new THREE.Mesh(new THREE.SphereGeometry(.109,40,20,0,Math.PI*2,0,Math.PI*.52),hair);cap.position.set(0,1.645*k,-.006);cap.scale.set(.88,1.12,.99);cap.rotation.x=-.35;grp.add(cap);
+  if(fem){const tail=new THREE.Mesh(new THREE.CapsuleGeometry(.032,.15,6,12),hair);tail.position.set(0,1.6*k,-.115);tail.rotation.x=.45;grp.add(tail);}
+  for(const s of [-1,1]){const side=s>0?'Left':'Right';
+    // arms hang slightly out from the body (A-pose) so every side can be reached
+    const sh=new THREE.Group();sh.position.set(s*(fem?.188:.205),1.37*k,0);sh.rotation.z=Math.PI+s*.27;grp.add(sh);
+    const ua=.31*k,fa=.27*k;
+    add(side+'Upper',ua,capped(ua,fem?[[0,.046],[.3,.043],[1,.034]]:[[0,.054],[.3,.052],[.7,.045],[1,.04]]),sh,{label:side+' upper arm'});
+    const el=new THREE.Group();el.position.y=ua*.9;el.rotation.z=-s*.08;el.rotation.x=.08;sh.add(el);
+    add(side+'Fore',fa,capped(fa,fem?[[0,.035],[.25,.037],[1,.026]]:[[0,.041],[.25,.045],[1,.031]]),el,{label:side+' forearm'});
+    const wr=new THREE.Group();wr.position.y=fa*.9;el.add(wr);
+    add(side+'Hand',.17*k,capped(.17*k,[[0,.03],[.45,.037],[1,.02]]),wr,{sx:.56,label:side+' hand'});
+    const hip=new THREE.Group();hip.position.set(s*(fem?.098:.094),.86*k,0);hip.rotation.z=Math.PI+s*.04;grp.add(hip);
+    const th=.43*k,ca=.41*k;
+    add(side+'Thigh',th,capped(th,fem?[[0,.094],[.3,.082],[1,.054]]:[[0,.09],[.3,.08],[1,.056]]),hip,{label:side+' thigh',clothes:g=>band(g,0,fem?1:.52,fabric)});
+    const kn=new THREE.Group();kn.position.y=th*.92;hip.add(kn);
+    add(side+'Calf',ca,capped(ca,[[0,.054],[.28,.058],[.8,.039],[1,.035]]),kn,{label:side+' calf',clothes:fem?g=>band(g,0,.84,fabric):null});
+    const an=new THREE.Group();an.position.y=ca*.97;kn.add(an);
+    const foot=new THREE.Mesh(new THREE.CapsuleGeometry(.042,.15,6,14),shoe);foot.rotation.x=Math.PI/2;foot.position.set(0,.03,.05);foot.scale.set(1,1,.8);an.add(foot);
+    const so=new THREE.Mesh(new THREE.BoxGeometry(.088,.018,.24),sole);so.position.set(0,.064,.05);an.add(so);}
+  grp.visible=false;scene.add(grp);return{grp,parts,fem};
+}
+figures.m=makeFigure(false);figures.f=makeFigure(true);
+let fig=figures.m;fig.grp.visible=true;
 
-// the design: a simple peony in four parts: centre (machine), middle petals (you), outer petals (machine), leaves (you)
-const C=[.5,.53];
-const petal=(a0,a1,r0,r1,n=26)=>{const p=[];for(let i=0;i<=n;i++){const t=i/n,a=a0+(a1-a0)*t,swell=Math.pow(Math.sin(Math.PI*t),.6);p.push([C[0]+Math.cos(a)*(r0+(r1-r0)*swell),C[1]+Math.sin(a)*(r0+(r1-r0)*swell)*.9]);}return p;};
-const ring=(n,r0,r1,off)=>Array.from({length:n},(_,k)=>{const a0=off+k/n*Math.PI*2;return petal(a0,a0+Math.PI*2/n*1.1,r0,r1);});
-const leaf=(ang,len)=>{const base=[C[0]+Math.cos(ang)*.33,C[1]+Math.sin(ang)*.3],tip=[base[0]+Math.cos(ang)*len,base[1]+Math.sin(ang)*len],nx=-Math.sin(ang)*.05,ny=Math.cos(ang)*.05,s1=[],s2=[];
-  for(let i=0;i<=20;i++){const t=i/20,w=Math.sin(Math.PI*Math.pow(t,.8)),x=base[0]+(tip[0]-base[0])*t,y=base[1]+(tip[1]-base[1])*t;s1.push([x+nx*w,y+ny*w]);s2.push([x-nx*w,y-ny*w]);}return[s1,s2];};
-const parts=[
-  {who:'carl',say:'Carl lines the centre',strokes:[...ring(4,0,.08,0),...ring(5,.05,.16,.6)]},
-  {who:'you',say:'Your turn: trace all the purple petals',strokes:[...ring(6,.11,.25,.15),...ring(7,.17,.33,.45)]},
-  {who:'you',say:'Your turn: trace the leaves',strokes:[...leaf(-1.0,.14),...leaf(-2.2,.13),...leaf(.4,.11)]}];
-console.assert(parts.every(p=>p.strokes.every(s=>s.every(([x,y])=>x>0&&x<1&&y>0&&y<1))),'design stays inside its box');
+// ---- flash designs, drawn once as black linework on 256px tiles
+const mk=fn=>{const c=document.createElement('canvas');c.width=c.height=256;const g=c.getContext('2d');g.strokeStyle=g.fillStyle='#141216';g.lineWidth=7;g.lineCap=g.lineJoin='round';fn(g);return c;};
+const designs={
+  peony:mk(g=>{const ring=(n,r0,r1,off)=>{for(let q=0;q<n;q++){const a0=off+q/n*Math.PI*2,a1=a0+Math.PI*2/n*1.1;g.beginPath();for(let i=0;i<=24;i++){const t=i/24,a=a0+(a1-a0)*t,r=r0+(r1-r0)*Math.pow(Math.sin(Math.PI*t),.6);const x=128+Math.cos(a)*r,y=128+Math.sin(a)*r*.9;i?g.lineTo(x,y):g.moveTo(x,y);}g.stroke();}};ring(4,0,20,0);ring(5,12,44,.6);ring(6,30,72,.15);ring(7,50,104,.45);}),
+  rose:mk(g=>{g.beginPath();for(let a=0;a<5.5*Math.PI;a+=.08){const r=3+a*3.6,x=128+Math.cos(a)*r,y=118+Math.sin(a)*r*.85;a?g.lineTo(x,y):g.moveTo(x,y);}g.stroke();
+    for(let q=0;q<5;q++){const a=q/5*Math.PI*2-.4;g.beginPath();g.arc(128+Math.cos(a)*48,118+Math.sin(a)*40,40,a-1.4,a+1.4);g.stroke();}
+    for(const s of [-1,1]){g.beginPath();g.ellipse(128+s*62,212,40,16,s*.5,0,Math.PI*2);g.stroke();g.beginPath();g.moveTo(128+s*28,206);g.lineTo(128+s*96,220);g.stroke();}}),
+  heart:mk(g=>{g.lineWidth=9;g.beginPath();g.moveTo(128,222);g.bezierCurveTo(10,140,34,28,128,82);g.bezierCurveTo(222,28,246,140,128,222);g.stroke();g.lineWidth=6;g.beginPath();g.arc(82,96,24,Math.PI*1.05,Math.PI*1.55);g.stroke();
+    for(let i=0;i<7;i++){g.beginPath();g.moveTo(150+i*6,190-i*16);g.lineTo(196-i*2,140-i*14);g.stroke();}}),
+  star:mk(g=>{const pt=(i,r)=>[128+Math.cos(-Math.PI/2+i*Math.PI/5)*r,128+Math.sin(-Math.PI/2+i*Math.PI/5)*r];
+    for(let i=0;i<10;i+=2){const o=pt(i,118),l=pt(i-1,48),r=pt(i+1,48);g.beginPath();g.moveTo(128,128);g.lineTo(...o);g.lineTo(...r);g.closePath();g.fill();g.beginPath();g.moveTo(128,128);g.lineTo(...o);g.lineTo(...l);g.closePath();g.stroke();}})};
 
-const px=p=>{const[u,v]=toUV(p);return[u*S,(1-v)*S];};
-const line=(a,b,style,w,dash)=>{g.save();g.strokeStyle=style;g.lineWidth=w;g.lineCap=g.lineJoin='round';if(dash)g.setLineDash(dash);else{g.shadowColor='rgba(30,30,60,.45)';g.shadowBlur=3*K;}g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.stroke();g.restore();};
-const INK='rgba(16,14,20,.93)',INKW=5*K;
-const guide=s=>{g.save();g.strokeStyle='rgba(91,63,196,.85)';g.lineWidth=4*K;g.setLineDash([14*K,10*K]);g.lineCap='round';g.beginPath();s.forEach(([x,y],i)=>{const[a,b]=px([x,y]);i?g.lineTo(a,b):g.moveTo(a,b);});g.stroke();g.restore();};
+// ---- state and camera moves
+let mode='browse',yaw=0,yawTo=0,tool='draw',size=.08,focus=null,tw=null;
+const setHint=t=>hint.textContent=t;
+const tween=(pos,lk)=>{tw={a:cam.position.clone(),b:pos,la:look.clone(),lb:lk,t:0};};
+const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+const pick=e=>{const r=renderer.domElement.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,cam);return ray.intersectObjects(fig.parts.map(p=>p.mesh),false)[0]||null;};
+const labelOf=h=>{const p=h.object.userData.part;if(p.name!=='torso')return p.label;const lp=h.object.worldToLocal(h.point.clone());return lp.z>=0?'Chest':'Back';};
+function zoomTo(h){const n=h.face.normal.clone().transformDirection(h.object.matrixWorld);n.y*=.5;n.normalize();
+  tween(h.point.clone().addScaledVector(n,.6).add(new V(0,.04,0)),h.point.clone());mode='ink';focus={label:labelOf(h),parts:new Set()};
+  box.classList.add('ink');setHint('Draw on the skin, or pick a design and tap');}
+function zoomOut(){if(mode!=='ink')return;mode='browse';box.classList.remove('ink','drawing');
+  if(focus.parts.size){renderer.render(scene,cam);const c=document.createElement('canvas');c.width=c.height=480;const s=renderer.domElement,m=Math.min(s.width,s.height);
+    c.getContext('2d').drawImage(s,(s.width-m)/2,(s.height-m)/2,m,m,0,0,480,480);addPiece(focus.label,c.toDataURL('image/jpeg',.9));}
+  focus=null;tween(HOME.pos.clone(),HOME.look.clone());setHint('Drag to turn · tap a spot to tattoo it');}
+const pieces=[];
+function addPiece(label,url){pieces.push({label,url});const b=document.createElement('button');b.type='button';b.className='saved';b.title='Save this piece';
+  b.innerHTML=`<img alt="">${''}<span></span>`;b.querySelector('img').src=url;b.querySelector('img').alt=label+' tattoo close-up';b.querySelector('span').textContent=label;
+  b.onclick=()=>download(url,`tattoo-island-${label.toLowerCase().replace(/\W+/g,'-')}.jpg`);strip.appendChild(b);saveAll.disabled=false;}
+const download=(url,name)=>{const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();};
 
-// buzz while the visitor inks. Long steady pulses: very short ones are ignored by many Android motors.
+// ---- ink: free lines, or a stamped design turned to face the camera
+const INK='rgba(18,16,22,.93)';let down=false,last=null,moved=0,sx0=0,sy0=0;
+const uvPx=h=>[h.uv.x*T,(1-h.uv.y)*T];
+const segment=(p,a,b)=>{if(Math.abs(a[0]-b[0])>T/2)return;const g=p.ink.getContext('2d');g.strokeStyle=INK;g.lineWidth=3.6;g.lineCap=g.lineJoin='round';g.shadowColor='rgba(20,20,40,.35)';g.shadowBlur=1.5;g.beginPath();g.moveTo(...a);g.lineTo(...b);g.stroke();p.dirty=true;compose(p);};
+function stamp(h){const p=h.object.userData.part,[x,y]=uvPx(h),v=h.uv.y,phi=h.uv.x*Math.PI*2;
+  const du=new V(Math.cos(phi),0,-Math.sin(phi)).transformDirection(h.object.matrixWorld),dv=new V(0,1,0).transformDirection(h.object.matrixWorld);
+  const right=new V().setFromMatrixColumn(cam.matrixWorld,0),up=new V().setFromMatrixColumn(cam.matrixWorld,1);
+  const fx=du.dot(right)>=0?1:-1,fy=dv.dot(up)>=0?1:-1;
+  const circ=2*Math.PI*p.rf(v)*(p.sx+p.sz)/2,wu=size*T/circ,wv=size*T/p.len,g=p.ink.getContext('2d');
+  for(const ox of [0,-T,T]){if(ox&&Math.abs(x+ox-T/2)>T/2+wu/2)continue;g.save();g.translate(x+ox,y);g.scale(fx*wu/256,fy*wv/256);g.drawImage(designs[tool],-128,-128);g.restore();}
+  p.dirty=true;compose(p);focus.parts.add(p);}
+// shortcut: a vibrate pulse shorter than ~60ms is ignored by many Android motors, so long steady pulses; iOS gets the switch tick
 const hap=document.createElement('label');hap.setAttribute('aria-hidden','true');hap.style.cssText='position:fixed;left:-99px;top:0;opacity:0;pointer-events:none';hap.innerHTML='<input type="checkbox" switch tabindex="-1">';document.body.appendChild(hap);
-const canVibe=typeof navigator.vibrate==='function';let buzzT=0;
+let buzzT=0;const canVibe=typeof navigator.vibrate==='function';
 const buzzOn=()=>{clearInterval(buzzT);if(canVibe){navigator.vibrate(400);buzzT=setInterval(()=>navigator.vibrate(400),350);}else{hap.click();buzzT=setInterval(()=>hap.click(),90);}};
 const buzzOff=()=>{clearInterval(buzzT);if(canVibe)navigator.vibrate(0);};
+const placeMach=e=>{const r=box.getBoundingClientRect();mach.style.transform=`translate(${e.clientX-r.left-1.1}px,${e.clientY-r.top-92}px) rotate(8deg)`;};   // needle tip of the 90px-wide photo
 
-// turns
-let mode='wait',pi=0,si=0,step=0,acc=0,lift=0,pause=0;
-// the visitor's part counts once nearly every point of its stencil has ink near it (finger-sized tolerance)
-let todo=[],hitPts=null,done=0;const NEED=.85,R=()=>30*K;
-const near=(a,b)=>{const dx=b[0]-a[0],dy=b[1]-a[1],L=dx*dx+dy*dy||1,r2=R()*R();for(let i=0;i<todo.length;i++){if(hitPts[i])continue;const q=todo[i];let t=((q[0]-a[0])*dx+(q[1]-a[1])*dy)/L;t=t<0?0:t>1?1:t;const ex=a[0]+t*dx-q[0],ey=a[1]+t*dy-q[1];if(ex*ex+ey*ey<r2){hitPts[i]=1;done++;}}};
-const pct=()=>todo.length?done/todo.length:0;
-const SPEED=38;   // points per second: slow enough to follow
-const say=(t,n)=>{turnText.textContent=t;turnStep.textContent=n;};
-const start=()=>{const P=parts[step];box.classList.remove('yours');
-  if(!P){mode='over';box.classList.add('over');say('Finished: your peony','');return;}
-  mode=P.who;si=pi=0;acc=0;say(P.say,`${step+1} / ${parts.length}`);
-  if(mode==='you'){P.strokes.forEach(guide);tex.needsUpdate=true;box.classList.add('yours');todo=P.strokes.flat().map(px);hitPts=new Uint8Array(todo.length);done=0;say(P.say,'0%');}};
-const reset=()=>{buzzOff();paintSkin();tex.needsUpdate=true;step=0;box.classList.remove('over');start();};
-paintSkin();tex.needsUpdate=true;say('Get ready','');
-document.getElementById('again').onclick=reset;
+stage.addEventListener('pointerdown',e=>{sx0=e.clientX;sy0=e.clientY;moved=0;
+  if(mode==='browse'){down=true;last=e.clientX;return;}
+  const h=pick(e);if(!h)return;e.preventDefault();stage.setPointerCapture(e.pointerId);placeMach(e);
+  if(tool!=='draw'){stamp(h);return;}
+  down=true;last={p:h.object.userData.part,px:uvPx(h)};focus.parts.add(last.p);box.classList.add('drawing');buzzOn();});
+stage.addEventListener('pointermove',e=>{moved=Math.max(moved,Math.hypot(e.clientX-sx0,e.clientY-sy0));
+  if(mode==='browse'){if(down){yawTo+=(e.clientX-last)/W()*4;last=e.clientX;}return;}
+  placeMach(e);if(e.pointerType==='mouse')box.classList.add('hover');if(!down)return;const h=pick(e);if(!h){last=null;return;}
+  const p=h.object.userData.part,px=uvPx(h);if(last&&last.p===p)segment(p,last.px,px);last={p,px};focus.parts.add(p);});
+const up=e=>{if(mode==='browse'){if(down&&moved<8){const h=pick(e);if(h)zoomTo(h);}down=false;return;}
+  if(down){down=false;buzzOff();box.classList.remove('drawing');}};
+stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',()=>{down=false;buzzOff();box.classList.remove('drawing');});
+stage.addEventListener('pointerleave',()=>box.classList.remove('hover'));
+document.getElementById('bodyDone').onclick=zoomOut;addEventListener('keydown',e=>{if(e.key==='Escape')zoomOut();});
+document.getElementById('turnL').onclick=()=>{yawTo-=Math.PI/2;};document.getElementById('turnR').onclick=()=>{yawTo+=Math.PI/2;};
+box.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{tool=b.dataset.tool;box.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('on',x===b));setHint(tool==='draw'?'Draw on the skin with your finger':'Tap the skin to place the '+tool);});
+box.querySelectorAll('[data-size]').forEach(b=>b.onclick=()=>{size=+b.dataset.size;box.querySelectorAll('[data-size]').forEach(x=>x.classList.toggle('on',x===b));});
+document.querySelectorAll('.who button').forEach(b=>b.onclick=()=>{if(mode==='ink')zoomOut();fig.grp.visible=false;fig=figures[b.dataset.who];fig.grp.visible=true;
+  document.querySelectorAll('.who button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b);});});
+document.getElementById('clearAll').onclick=()=>{if(mode==='ink')zoomOut();for(const f of Object.values(figures))for(const p of f.parts){p.ink.getContext('2d').clearRect(0,0,T,T);p.dirty=false;compose(p);}
+  pieces.length=0;strip.innerHTML='';saveAll.disabled=true;yawTo=0;};
+// one sheet: full body front and back, then every close-up
+saveAll.onclick=()=>{if(mode==='ink')zoomOut();tw=null;cam.position.copy(HOME.pos);look.copy(HOME.look);cam.lookAt(look);
+  const keep=fig.grp.rotation.y,shot=a=>{fig.grp.rotation.y=a;renderer.render(scene,cam);const c=document.createElement('canvas');c.width=W()*2;c.height=H()*2;c.getContext('2d').drawImage(renderer.domElement,0,0,c.width,c.height);return c;};
+  const front=shot(0),back=shot(Math.PI);fig.grp.rotation.y=keep;
+  const cols=3,cell=360,pad=30,bw=(1200-pad*3)/2,bh=bw*H()/W(),rows=Math.ceil(pieces.length/cols),sh=document.createElement('canvas');
+  sh.width=1200;sh.height=150+bh+pad+rows*(cell+50)+90;const g=sh.getContext('2d');g.fillStyle='#0f0e10';g.fillRect(0,0,sh.width,sh.height);
+  g.fillStyle='#f2efe9';g.font='bold 54px Anton, Impact, sans-serif';g.fillText('MY TATTOO PLAN',pad,90);g.font='22px Inter, sans-serif';g.fillStyle='#cfc8bf';g.fillText('Made on the Tattoo Island site · show it to Carl when you book',pad,128);
+  const bg=c=>{g.fillStyle='#1d1a1b';};bg();g.fillRect(pad,150,bw,bh);g.fillRect(pad*2+bw,150,bw,bh);g.drawImage(front,pad,150,bw,bh);g.drawImage(back,pad*2+bw,150,bw,bh);
+  pieces.forEach((p,i)=>{const im=strip.children[i].querySelector('img'),x=pad+(i%cols)*(cell+pad*.5),y=150+bh+pad+Math.floor(i/cols)*(cell+50);g.drawImage(im,x,y,cell,cell);g.fillStyle='#f2efe9';g.font='bold 22px Inter, sans-serif';g.fillText(p.label.toUpperCase(),x,y+cell+32);});
+  g.fillStyle='#cfc8bf';g.font='20px Inter, sans-serif';g.fillText('Tattoo Island · 714 Jacqueline Drive, Garsfontein · WhatsApp 073 923 1024',pad,sh.height-36);
+  download(sh.toDataURL('image/jpeg',.9),'my-tattoo-plan.jpg');};
 
-// the visitor's ink: where the finger meets the skin
-const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
-const hit=e=>{const r=renderer.domElement.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,cam);return ray.intersectObject(skin)[0]||null;};
-let down=false,lastPx=null,hover=null;
-const uvPx=h=>[h.uv.x*S,(1-h.uv.y)*S];
-stage.addEventListener('pointerdown',e=>{if(mode!=='you')return;const h=hit(e);if(!h)return;e.preventDefault();down=true;stage.setPointerCapture(e.pointerId);lastPx=uvPx(h);hover=h.point;buzzOn();});
-stage.addEventListener('pointermove',e=>{if(mode!=='you')return;const h=hit(e);hover=h?h.point:null;if(!down||!h)return;const p=uvPx(h);
-  line(lastPx,[p[0]+(Math.random()-.5)*K,p[1]+(Math.random()-.5)*K],INK,INKW);near(lastPx,p);say(parts[step].say,Math.round(pct()*100)+'%');lastPx=p;tex.needsUpdate=true;});
-const up=()=>{if(!down)return;down=false;buzzOff();if(mode==='you'&&pct()>=NEED){step++;pause=.6;mode='hand';}};
-stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);
-stage.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'&&!down)hover=null;});
-addEventListener('resize',()=>{renderer.setSize(W(),H());frame();});
-let visible=false;new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&mode==='wait'){pause=.8;mode='hand';}},{threshold:.4}).observe(stage);
-
-const clock=new THREE.Clock(),tipW=new THREE.Vector3(),REST=onSkin([1.08,.2],1.2);tipW.copy(REST);
-renderer.setAnimationLoop(()=>{
-  const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
-  if(!visible)return;
-  let target=REST,buzz=false;
-  if(mode==='hand'){pause-=dt;if(pause<=0)start();}
-  else if(mode==='carl'){const P=parts[step];acc+=dt*SPEED;
-    while(acc>=1&&si<P.strokes.length){const s=P.strokes[si];if(pi>0)line(px(s[pi-1]),px(s[pi]),INK,INKW);pi++;acc-=1;if(pi>=s.length){si++;pi=0;lift=1;}}
-    tex.needsUpdate=true;
-    if(si>=P.strokes.length){step++;pause=.9;mode='hand';}
-    else{const s=P.strokes[si];target=onSkin(s[Math.min(pi,s.length-1)],.03+lift*.5);lift=Math.max(0,lift-dt*3);buzz=lift<.1;}}
-  else if(mode==='you'&&hover){target=hover.clone();target.y+=down?.03:.45;buzz=down;}
-  tipW.lerp(target,Math.min(1,dt*(mode==='carl'||down?16:5)));
-  pen.position.copy(tipW);pen.rotation.copy(TILT);
-  if(buzz){pen.position.x+=(Math.random()-.5)*.006;needle.position.y=-.02+Math.sin(t*180)*.02;}
-  renderer.render(scene,cam);
-});
-// for the automated test: the current stencil in screen pixels
-window.__guide=()=>{const r=renderer.domElement.getBoundingClientRect();return(parts[step]?.strokes||[]).map(st=>st.map(p=>{const v=onSkin(p).project(cam);return[r.left+(v.x+1)/2*r.width,r.top+(1-v.y)/2*r.height];}));};
+addEventListener('resize',()=>{renderer.setSize(W(),H());cam.aspect=W()/H();cam.updateProjectionMatrix();});
+let visible=false;new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(stage);
+cam.aspect=W()/H();cam.updateProjectionMatrix();
+const clock=new THREE.Clock();
+renderer.setAnimationLoop(()=>{const dt=Math.min(clock.getDelta(),.05);if(!visible)return;
+  yaw+=(yawTo-yaw)*Math.min(1,dt*8);fig.grp.rotation.y=yaw;
+  if(tw){tw.t=Math.min(1,tw.t+dt/.75);const k=1-Math.pow(1-tw.t,3);cam.position.lerpVectors(tw.a,tw.b,k);look.lerpVectors(tw.la,tw.lb,k);if(tw.t>=1)tw=null;}
+  cam.lookAt(look);renderer.render(scene,cam);});
 stage.classList.add('live');
+// for the automated test: where a part's middle is on screen
+window.__body={spot:name=>{const p=fig.parts.find(q=>q.name===name);const w=p.mesh.localToWorld(new V(0,p.len/2,p.rf(.5)*p.sz*.9)).project(cam),r=renderer.domElement.getBoundingClientRect();return[r.left+(w.x+1)/2*r.width,r.top+(1-w.y)/2*r.height];},mode:()=>mode,pieces:()=>pieces.length};
 </script>
 </body>
 </html>
