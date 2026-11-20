@@ -79,8 +79,11 @@ section{position:relative}
 .frame .tag{position:absolute;left:12px;top:12px;font:700 10.5px Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:6px 9px;background:rgba(10,10,11,.75);color:#fff;transition:background .4s}
 .frame .tag::before{content:"Stencil"}
 .piece.inked .tag{background:var(--red)}.piece.inked .tag::before{content:"Inked"}
-.piece figcaption{margin-top:12px;min-height:58px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px;color:#cfc8bf}
-.piece figcaption b{font:400 26px/1.05 Anton,sans-serif;text-transform:uppercase;color:var(--paper)}
+.piece figcaption{margin-top:14px;min-height:96px}
+.piece .meta{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.piece .style{font:700 10.5px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#cfc8bf;border:1px solid var(--line);padding:4px 8px}
+.piece figcaption b{display:block;margin-top:8px;font:400 28px/1.02 Anton,sans-serif;text-transform:uppercase;color:var(--paper)}
+.piece .line{display:block;margin-top:6px;font-size:14.5px;color:#cfc8bf}
 .piece .n{font:700 12px Inter,sans-serif;letter-spacing:.2em;color:#ff5a4e}
 
 /* watch the needle, then try it */
@@ -88,11 +91,11 @@ section{position:relative}
 .paper .kicker{color:#b01c15}
 .paper .lead{color:#3a3633}
 .blot{clip-path:circle(var(--r,0%) at 50% 0%)}
-.stageBox{position:relative;max-width:980px;margin:36px auto 0;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(70% 60% at 50% 45%,#2a2420,#141215 70%);border:2px solid #151416;box-shadow:12px 12px 0 #151416}
+.stageBox{position:relative;max-width:640px;margin:36px auto 0;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(70% 60% at 50% 45%,#2a2420,#141215 70%);border:2px solid #151416;box-shadow:12px 12px 0 #151416}
 #stage{position:absolute;inset:0}
 #stage canvas{display:block;width:100%!important;height:100%!important;opacity:0;transition:opacity 1s}
 #stage.live canvas{opacity:1}
-@media(max-width:700px){.stageBox{aspect-ratio:1/1}}
+@media(max-width:700px){.stageBox{aspect-ratio:1/1;width:86%}}
 #stage{touch-action:pan-y}.stageBox.yours #stage{touch-action:none;cursor:crosshair}
 .turn{position:absolute;left:12px;top:12px;right:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;pointer-events:none}
 .turn b{font:700 11.5px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:8px 11px;background:rgba(10,10,11,.8);color:#fff;transition:background .3s}
@@ -196,14 +199,14 @@ body.loading{overflow:hidden}
     <h2 class="display h2 reveal" style="margin-top:10px">The <span class="serif">work</span></h2>
     <p class="lead reveal">Recent pieces from Carl's chair. Each one starts as its stencil and fills with ink as you scroll.</p>
     <div class="grid3">
-      <figure class="piece"><div class="frame"><img src="media/w-freehand.webp" alt="Large black and grey floral tattoo on a thigh, done freehand" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span><span class="n">01</span><br><b>Freehand floral</b></span><span>No stencil</span></figcaption></figure>
-      <figure class="piece"><div class="frame"><img src="media/w-horror.webp" alt="Black and grey realism face, part of a horror sleeve" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span><span class="n">02</span><br><b>Horror sleeve</b></span><span>Realism</span></figcaption></figure>
-      <figure class="piece"><div class="frame"><img src="media/w-sleeve-start.webp" alt="Close-up of black and grey flower shading on a leg sleeve" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span><span class="n">03</span><br><b>Leg sleeve</b></span><span>Day one</span></figcaption></figure>
-      <figure class="piece"><div class="frame"><img src="media/w-sleeve-progress.webp" alt="Leg sleeve in progress with shaded flowers and fresh linework" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span><span class="n">04</span><br><b>Sleeve, in progress</b></span><span>Shading</span></figcaption></figure>
-      <figure class="piece"><div class="frame"><img src="media/w-linework.webp" alt="Fresh floral linework across a hip and thigh" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span><span class="n">05</span><br><b>Floral linework</b></span><span>Hip to thigh</span></figcaption></figure>
-      <figure class="piece"><div class="frame"><img src="media/w-coverup.webp" alt="Carl tattooing over an older piece with gloved hands" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span><span class="n">06</span><br><b>Cover-up</b></span><span>Two days</span></figcaption></figure>
-      <figure class="piece"><div class="frame"><img src="media/w-quick.webp" alt="Black and grey bird illustration tattoo in progress" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span><span class="n">07</span><br><b>Quick something</b></span><span>Black and grey</span></figcaption></figure>
-      <figure class="piece"><div class="frame"><img src="media/w-turbo.webp" alt="Stencil for a turbocharger tattoo" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span><span class="n">08</span><br><b>Turbo</b></span><span>Freehand</span></figcaption></figure>
+      <figure class="piece"><div class="frame"><img src="media/w-freehand.webp" alt="Large black and grey floral tattoo on a thigh, done freehand" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span class="meta"><span class="n">01</span><span class="style">Freehand</span></span><b>Freehand floral</b><span class="line">Drawn straight onto the skin. No stencil.</span></figcaption></figure>
+      <figure class="piece"><div class="frame"><img src="media/w-horror.webp" alt="Black and grey realism face, part of a horror sleeve" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span class="meta"><span class="n">02</span><span class="style">Realism</span></span><b>Horror sleeve</b><span class="line">Black and grey faces for a horror sleeve.</span></figcaption></figure>
+      <figure class="piece"><div class="frame"><img src="media/w-sleeve-start.webp" alt="Close-up of black and grey flower shading on a leg sleeve" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span class="meta"><span class="n">03</span><span class="style">Black and grey</span></span><b>Floral leg sleeve</b><span class="line">Day one: the first flowers shaded in.</span></figcaption></figure>
+      <figure class="piece"><div class="frame"><img src="media/w-sleeve-progress.webp" alt="Leg sleeve in progress with shaded flowers and fresh linework" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span class="meta"><span class="n">04</span><span class="style">Shading</span></span><b>Sleeve, in progress</b><span class="line">Shaded flowers next to fresh linework.</span></figcaption></figure>
+      <figure class="piece"><div class="frame"><img src="media/w-linework.webp" alt="Fresh floral linework across a hip and thigh" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span class="meta"><span class="n">05</span><span class="style">Fineline</span></span><b>Floral linework</b><span class="line">Clean lines from hip to thigh, ready for shading.</span></figcaption></figure>
+      <figure class="piece"><div class="frame"><img src="media/w-coverup.webp" alt="Carl tattooing over an older piece with gloved hands" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span class="meta"><span class="n">06</span><span class="style">Cover-up</span></span><b>Cover-up</b><span class="line">New work over an older tattoo, done over two days.</span></figcaption></figure>
+      <figure class="piece"><div class="frame"><img src="media/w-quick.webp" alt="Black and grey bird illustration tattoo in progress" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span class="meta"><span class="n">07</span><span class="style">Illustrative</span></span><b>Bird in black and grey</b><span class="line">A bird illustration, mid-session.</span></figcaption></figure>
+      <figure class="piece"><div class="frame"><img src="media/w-turbo.webp" alt="Stencil for a turbocharger tattoo" loading="lazy"><span class="tag" aria-hidden="true"></span></div><figcaption><span class="meta"><span class="n">08</span><span class="style">Custom</span></span><b>Turbocharger</b><span class="line">A car part as a tattoo: the stencil, ready to ink.</span></figcaption></figure>
     </div>
     <a class="btn btn-line reveal" style="margin-top:44px" href="https://www.instagram.com/carl_the_creator.2.0/" target="_blank" rel="noopener">More on Instagram</a>
   </div>
@@ -383,7 +386,7 @@ const bend=x=>-(x*x)*.03;
 const skin=new THREE.Mesh(sg,new THREE.MeshStandardMaterial({map:tex,roughness:.62,metalness:0}));
 skin.rotation.x=-Math.PI/2;skin.receiveShadow=true;scene.add(skin);
 // the design lives in a 0..1 box, D units across, in the middle of the skin
-const D=8.4,toUV=([x,y])=>[.5+(x-.5)*D/SW,.5+(y-.5)*D/SH];
+const D=7.6,toUV=([x,y])=>[.5+(x-.5)*D/SW,.5+(y-.5)*D/SH];
 const onSkin=(p,lift=0)=>{const[u,v]=toUV(p),x=(u-.5)*SW,y=(v-.5)*SH;return new THREE.Vector3(x,bend(x)+lift,-y);};
 
 // the machine: a classic coil machine, built along +Y with the needle tip at the origin
@@ -418,8 +421,7 @@ const leaf=(ang,len)=>{const base=[C[0]+Math.cos(ang)*.33,C[1]+Math.sin(ang)*.3]
   for(let i=0;i<=20;i++){const t=i/20,w=Math.sin(Math.PI*Math.pow(t,.8)),x=base[0]+(tip[0]-base[0])*t,y=base[1]+(tip[1]-base[1])*t;s1.push([x+nx*w,y+ny*w]);s2.push([x-nx*w,y-ny*w]);}return[s1,s2];};
 const parts=[
   {who:'carl',say:'Carl lines the centre',strokes:[...ring(4,0,.08,0),...ring(5,.05,.16,.6)]},
-  {who:'you',say:'Your turn: trace the purple petals',strokes:ring(6,.11,.25,.15)},
-  {who:'carl',say:'Carl adds the outer petals',strokes:ring(7,.17,.33,.45)},
+  {who:'you',say:'Your turn: trace all the purple petals',strokes:[...ring(6,.11,.25,.15),...ring(7,.17,.33,.45)]},
   {who:'you',say:'Your turn: trace the leaves',strokes:[...leaf(-1.0,.14),...leaf(-2.2,.13),...leaf(.4,.11)]}];
 console.assert(parts.every(p=>p.strokes.every(s=>s.every(([x,y])=>x>0&&x<1&&y>0&&y<1))),'design stays inside its box');
 
@@ -435,13 +437,17 @@ const buzzOn=()=>{clearInterval(buzzT);if(canVibe){navigator.vibrate(400);buzzT=
 const buzzOff=()=>{clearInterval(buzzT);if(canVibe)navigator.vibrate(0);};
 
 // turns
-let mode='wait',pi=0,si=0,step=0,acc=0,lift=0,pause=0,inked=0;
+let mode='wait',pi=0,si=0,step=0,acc=0,lift=0,pause=0;
+// the visitor's part counts once nearly every point of its stencil has ink near it (finger-sized tolerance)
+let todo=[],hitPts=null,done=0;const NEED=.85,R=()=>30*K;
+const near=(a,b)=>{const dx=b[0]-a[0],dy=b[1]-a[1],L=dx*dx+dy*dy||1,r2=R()*R();for(let i=0;i<todo.length;i++){if(hitPts[i])continue;const q=todo[i];let t=((q[0]-a[0])*dx+(q[1]-a[1])*dy)/L;t=t<0?0:t>1?1:t;const ex=a[0]+t*dx-q[0],ey=a[1]+t*dy-q[1];if(ex*ex+ey*ey<r2){hitPts[i]=1;done++;}}};
+const pct=()=>todo.length?done/todo.length:0;
 const SPEED=38;   // points per second: slow enough to follow
 const say=(t,n)=>{turnText.textContent=t;turnStep.textContent=n;};
 const start=()=>{const P=parts[step];box.classList.remove('yours');
   if(!P){mode='over';box.classList.add('over');say('Finished: your peony','');return;}
-  mode=P.who;si=pi=0;acc=0;inked=0;say(P.say,`${step+1} / ${parts.length}`);
-  if(mode==='you'){P.strokes.forEach(guide);tex.needsUpdate=true;box.classList.add('yours');}};
+  mode=P.who;si=pi=0;acc=0;say(P.say,`${step+1} / ${parts.length}`);
+  if(mode==='you'){P.strokes.forEach(guide);tex.needsUpdate=true;box.classList.add('yours');todo=P.strokes.flat().map(px);hitPts=new Uint8Array(todo.length);done=0;say(P.say,'0%');}};
 const reset=()=>{buzzOff();paintSkin();tex.needsUpdate=true;step=0;box.classList.remove('over');start();};
 paintSkin();tex.needsUpdate=true;say('Get ready','');
 document.getElementById('again').onclick=reset;
@@ -453,8 +459,8 @@ let down=false,lastPx=null,hover=null;
 const uvPx=h=>[h.uv.x*S,(1-h.uv.y)*S];
 stage.addEventListener('pointerdown',e=>{if(mode!=='you')return;const h=hit(e);if(!h)return;e.preventDefault();down=true;stage.setPointerCapture(e.pointerId);lastPx=uvPx(h);hover=h.point;buzzOn();});
 stage.addEventListener('pointermove',e=>{if(mode!=='you')return;const h=hit(e);hover=h?h.point:null;if(!down||!h)return;const p=uvPx(h);
-  line(lastPx,[p[0]+(Math.random()-.5)*K,p[1]+(Math.random()-.5)*K],INK,INKW);inked+=Math.hypot(p[0]-lastPx[0],p[1]-lastPx[1]);lastPx=p;tex.needsUpdate=true;});
-const up=()=>{if(!down)return;down=false;buzzOff();if(mode==='you'&&inked>150*K){step++;pause=.6;mode='hand';}};
+  line(lastPx,[p[0]+(Math.random()-.5)*K,p[1]+(Math.random()-.5)*K],INK,INKW);near(lastPx,p);say(parts[step].say,Math.round(pct()*100)+'%');lastPx=p;tex.needsUpdate=true;});
+const up=()=>{if(!down)return;down=false;buzzOff();if(mode==='you'&&pct()>=NEED){step++;pause=.6;mode='hand';}};
 stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);
 stage.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'&&!down)hover=null;});
 addEventListener('resize',()=>{renderer.setSize(W(),H());frame();});
@@ -477,6 +483,8 @@ renderer.setAnimationLoop(()=>{
   if(buzz){pen.position.x+=(Math.random()-.5)*.006;needle.position.y=-.02+Math.sin(t*180)*.02;}
   renderer.render(scene,cam);
 });
+// for the automated test: the current stencil in screen pixels
+window.__guide=()=>{const r=renderer.domElement.getBoundingClientRect();return(parts[step]?.strokes||[]).map(st=>st.map(p=>{const v=onSkin(p).project(cam);return[r.left+(v.x+1)/2*r.width,r.top+(1-v.y)/2*r.height];}));};
 stage.classList.add('live');
 </script>
 </body>
