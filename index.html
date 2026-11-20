@@ -305,8 +305,9 @@ details summary{cursor:pointer;padding:10px 0;display:inline-block}
 // come and go with the progress; the ink bar fills. Reduced motion: the finished tattoo and the title, no scrubbing.
 {const hero=document.getElementById('hero'),film=document.getElementById('film'),bar=document.getElementById('inkBar'),ht=document.getElementById('heroText'),et=document.getElementById('endText'),cue=document.getElementById('scrollCue'),caps=[...hero.querySelectorAll('.cap')];
  film.src=matchMedia('(orientation: portrait)').matches?film.dataset.port:film.dataset.land;
- const prime=()=>{const p=film.play();if(p&&p.then)p.then(()=>film.pause()).catch(()=>{});};   // iOS shows seeked frames only after a first play
- film.addEventListener('loadeddata',prime,{once:true});addEventListener('touchstart',prime,{once:true,passive:true});
+ // iOS paints seeked frames only after a first start: start and stop in the same tick so nothing visibly plays
+ const prime=()=>{const t=film.currentTime,p=film.play();film.pause();if(p&&p.catch)p.catch(()=>{});film.currentTime=t;};
+ film.addEventListener('loadedmetadata',()=>{film.currentTime=0;},{once:true});addEventListener('touchstart',prime,{once:true,passive:true});
  let want=0,shown=0,tick=false;
  const prog=()=>{const r=hero.getBoundingClientRect(),run=hero.offsetHeight-innerHeight;return Math.min(1,Math.max(0,-r.top/run));};
  const step=()=>{tick=false;const p=prog();want=p;

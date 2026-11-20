@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tattoo Island · Tattoo collective in Garsfontein, Pretoria</title>
+<meta name="description" content="Tattoo Island: a tattoo collective of five artists at 714 Jacqueline Drive, Garsfontein, Pretoria East. Realism, freehand and fineline work. Book on WhatsApp 073 923 1024.">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="../media/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0b;--ink2:#151416;--paper:#f2efe9;--red:#d7261e;--muted:#9b958e;--line:rgba(242,239,233,.15);--wa:#0f7a40}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--paper);font:400 16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+img{display:block;max-width:100%}a{color:inherit}
+.display{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.86;letter-spacing:-.005em}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+.wrap{width:min(100% - 32px,1240px);margin-inline:auto}
+.kicker{font:700 12px Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;padding:0 24px;font:700 15px Inter,sans-serif;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;border:0;cursor:pointer;border-radius:0;transition:transform .2s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn svg{width:20px;height:20px}
+.btn-wa{background:var(--wa);color:#fff}.btn-wa:hover{background:#0c6835}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#b81f18}
+.btn-line{border:2px solid currentColor;background:transparent;color:inherit}
+.pitch{background:var(--paper);color:#222;font-size:12.5px;text-align:center;padding:6px 12px}
+.sm{display:none}@media(max-width:700px){.lg{display:none}.sm{display:inline}}
+
+/* header: thin, all business */
+header{position:fixed;left:0;right:0;top:28px;z-index:30;mix-blend-mode:difference;color:#fff;pointer-events:none}
+header .nav{display:flex;align-items:center;justify-content:space-between;height:56px}
+header a{pointer-events:auto;text-decoration:none}
+.brand{font:400 22px/1 Anton,sans-serif;letter-spacing:.04em;text-transform:uppercase;padding:12px 0;display:inline-block}
+.links{display:flex;gap:26px;font:700 12.5px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+@media(max-width:860px){.links{display:none}}
+.navBook{font:700 12.5px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;border:2px solid #fff;padding:9px 14px}
+
+/* hero: the film scrubs with scroll; TATTOO / ISLAND are outlines that fill with ink as you go */
+.hero{position:relative;height:280svh}
+.stick{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--ink)}
+.hero .poster,.hero .film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero picture{position:absolute;inset:0}
+.hero .shade{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 50%,transparent 30%,rgba(10,10,11,.75) 100%),linear-gradient(0deg,rgba(10,10,11,.85),transparent 40%)}
+.word{position:absolute;left:0;right:0;font-size:clamp(84px,21vw,330px);white-space:nowrap;text-align:center;pointer-events:none}
+.word span{display:block}
+.word .o{color:transparent;-webkit-text-stroke:2px rgba(242,239,233,.85)}
+.word .f{position:absolute;inset:0;color:var(--paper);clip-path:inset(calc(100% - var(--fill,0%)) 0 0 0)}
+.w1{top:9%}.w2{bottom:13%}
+@media(max-width:700px){.w1{top:13%}.w2{bottom:24%}.word .o{-webkit-text-stroke:1.5px rgba(242,239,233,.85)}}
+.heroFoot{position:absolute;left:0;right:0;bottom:0;padding:0 0 calc(22px + env(safe-area-inset-bottom))}
+.heroFoot .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.heroFoot p{max-width:420px;color:#ddd7cf;font-size:15.5px}
+@media(max-width:700px){.heroFoot{padding-bottom:88px}.heroFoot .btn{display:none}}
+.stage{position:absolute;right:max(16px,4vw);top:50%;transform:translateY(-50%);font:400 clamp(28px,4vw,52px)/1 "Instrument Serif",serif;font-style:italic;text-align:right;opacity:0;transition:opacity .5s}
+.stage.on{opacity:1}
+.stage small{display:block;font:700 11px Inter,sans-serif;font-style:normal;letter-spacing:.22em;color:var(--red);margin-bottom:6px}
+@media(max-width:700px){.stage{top:auto;bottom:40%;transform:none;right:16px}}
+.meter{position:absolute;left:max(16px,4vw);top:50%;transform:translateY(-50%);height:34vh;width:3px;background:rgba(242,239,233,.2)}
+.meter b{position:absolute;left:0;right:0;bottom:0;height:var(--fill,0%);background:var(--red)}
+.meter i{position:absolute;left:10px;bottom:-4px;font:700 10.5px Inter,sans-serif;font-style:normal;letter-spacing:.2em;color:#cfc8bf;writing-mode:vertical-rl;transform:rotate(180deg)}
+@media(max-width:700px){.meter{height:22vh;top:30%}}
+
+/* red band of styles, it slides with your scroll */
+.band{background:var(--red);color:#fff;overflow:hidden;padding:14px 0;border-block:2px solid #0a0a0b}
+.band .row{display:flex;gap:0;white-space:nowrap;will-change:transform}
+.band span{font:400 clamp(28px,4.4vw,56px)/1 Anton,sans-serif;text-transform:uppercase;padding-right:.5em}
+.band span em{font:italic 400 1em/1 "Instrument Serif",serif;text-transform:none;padding:0 .2em}
+
+section{position:relative}
+.pad-y{padding:100px 0}
+.h2{font-size:clamp(58px,10vw,150px)}
+
+/* work: scroll down, the gallery glides sideways */
+.work{height:calc(var(--len,300vw))}
+.work .pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:26px;padding-top:84px}
+.work .head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.track{display:flex;gap:clamp(14px,2vw,28px);padding-inline:max(16px,calc((100vw - 1240px)/2));will-change:transform}
+.piece{flex:0 0 clamp(250px,30vw,400px);position:relative}
+.piece img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(.15) contrast(1.05)}
+.piece .n{position:absolute;top:-.42em;left:-.1em;font:400 clamp(60px,7vw,110px)/1 Anton,sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--red);z-index:1}
+.piece figcaption{margin-top:10px;display:flex;justify-content:space-between;gap:12px;font-size:14px;color:#cfc8bf}
+.piece figcaption b{font:400 22px/1.05 Anton,sans-serif;text-transform:uppercase;color:var(--paper)}
+.piece:nth-child(even){margin-top:46px}
+.workBar{height:2px;background:var(--line);margin-inline:max(16px,calc((100vw - 1240px)/2))}.workBar b{display:block;height:100%;width:0;background:var(--red)}
+
+/* ink-blot reveal: a light section opens from a point as it comes into view */
+.blot{clip-path:circle(var(--r,0%) at 50% 0%)}
+.paper{background:var(--paper);color:#151416}
+.paper .kicker{color:var(--red)}
+
+/* sketch for fun */
+.sketch .grid{display:grid;gap:28px;align-items:center}
+@media(min-width:900px){.sketch .grid{grid-template-columns:.9fr 1.1fr}}
+.sketch p.lead{font-size:18px;color:#3a3633;max-width:440px;margin:14px 0 0}
+.padBox{position:relative;aspect-ratio:4/3;overflow:hidden;touch-action:none;cursor:crosshair;box-shadow:12px 12px 0 #151416;border:2px solid #151416;background:#d9b49a}
+@media(hover:hover){.padBox{cursor:none}}
+.padBox canvas{width:100%;height:100%;display:block}
+.padBox .hint{position:absolute;inset:auto 0 14px;text-align:center;font:700 12px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(40,25,15,.65);pointer-events:none;transition:opacity .5s}
+.padBox.used .hint{opacity:0}
+.mach{position:absolute;left:0;top:0;width:110px;height:auto;pointer-events:none;opacity:0;transition:opacity .2s;transform-origin:1.4px 113.8px;filter:drop-shadow(10px 14px 8px rgba(50,25,10,.45));z-index:2}
+.padBox.hover .mach,.padBox.inking .mach{opacity:1}
+.padBox.inking .mach{animation:buzz .045s linear infinite}
+@keyframes buzz{50%{margin-left:.7px;margin-top:-.6px}}
+.padBtns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.paper .btn-line{color:#151416}
+
+/* artists: an editorial list */
+.list{margin-top:34px;border-top:2px solid var(--paper)}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:padding .3s,color .3s}
+.row:hover{padding-left:12px;color:#fff}
+.row .num{font:700 12px Inter,sans-serif;letter-spacing:.2em;color:var(--red)}
+.row b{font:400 clamp(34px,5.5vw,72px)/1 Anton,sans-serif;text-transform:uppercase}
+.row small{display:block;font-size:13.5px;color:var(--muted);margin-top:6px}
+.row svg{width:28px;height:28px;transition:transform .3s}.row:hover svg{transform:translate(4px,-4px)}
+.owner{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.owner img{width:120px;height:150px;object-fit:cover;object-position:50% 25%;filter:grayscale(1) contrast(1.1)}
+.owner>div{min-width:0}.owner .kicker{display:block;line-height:1.5}.owner .btn{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.owner b{font:400 clamp(40px,7vw,96px)/.9 Anton,sans-serif;text-transform:uppercase}
+.owner p{color:#cfc8bf;font-size:15px;margin-top:8px;max-width:520px}
+@media(min-width:800px){.owner{grid-template-columns:180px 1fr}.owner img{width:180px;height:220px}}
+
+/* book */
+.steps{display:grid;gap:0;margin-top:40px}
+@media(min-width:900px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{padding:24px 0;border-top:2px solid var(--paper)}
+@media(min-width:900px){.step{padding:26px 26px 0 0}}
+.step .k{font:400 clamp(70px,9vw,130px)/.8 Anton,sans-serif;color:var(--red)}
+.step b{display:block;font:400 30px/1 Anton,sans-serif;text-transform:uppercase;margin:16px 0 8px}
+.step p{color:#cfc8bf}
+
+/* visit */
+.visit .grid{display:grid;gap:24px;margin-top:30px}
+@media(min-width:900px){.visit .grid{grid-template-columns:1fr 1.1fr}}
+.addr{font-size:clamp(46px,7.5vw,110px)}
+.vlinks a{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid rgba(21,20,22,.2);text-decoration:none;font-weight:600}
+.map{min-height:340px;border:2px solid #151416;box-shadow:12px 12px 0 #151416}
+.map iframe{width:100%;height:100%;min-height:340px;border:0;filter:grayscale(1) contrast(1.1)}
+footer{padding:40px 0 120px;color:var(--muted);font-size:13.5px}
+footer a{color:var(--paper);display:inline-block;padding:10px 0;margin:-10px 0}
+details summary{cursor:pointer;padding:10px 0;display:inline-block}
+
+.bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:40;display:none;gap:8px}
+@media(max-width:700px){.bar{display:flex}}
+.bar .btn{min-height:52px;flex:1;white-space:nowrap;padding:0 12px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.bar .btn-line{background:var(--ink);color:var(--paper);flex:.6}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.blot{clip-path:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></symbol>
+</svg>
+<div class="pitch"><span class="lg">A website preview made for Tattoo Island by </span><span class="sm">Website preview by </span><b>NFC Software Solutions</b></div>
+<header><div class="wrap nav">
+  <a class="brand" href="#top">Tattoo Island</a>
+  <nav class="links" aria-label="Sections"><a href="#work">Work</a><a href="#sketch">Sketch</a><a href="#artists">Artists</a><a href="#book">Book</a><a href="#visit">Visit</a></nav>
+  <a class="navBook" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener">Book</a>
+</div></header>
+
+<main id="top">
+<section class="hero" id="hero" aria-label="Tattoo Island">
+  <div class="stick" id="stick">
+    <picture><source media="(orientation: portrait)" srcset="../media/ink-port.webp"><img class="poster" src="../media/ink-land.webp" alt="" aria-hidden="true"></picture>
+    <video class="film" id="film" muted playsinline preload="auto" aria-hidden="true" data-land="../media/ink-land.mp4" data-port="../media/ink-port.mp4"></video>
+    <div class="shade"></div>
+    <h1 class="display" style="font-size:0"><span class="word w1"><span class="o">Tattoo</span><span class="f">Tattoo</span></span><span class="word w2"><span class="o">Island</span><span class="f">Island</span></span><span style="position:absolute;left:-9999px;font-size:16px">Tattoo Island</span></h1>
+    <div class="meter" aria-hidden="true"><b></b><i>INK</i></div>
+    <p class="stage" data-from=".2" data-to=".45"><small>Step one</small>line by line</p>
+    <p class="stage" data-from=".5" data-to=".76"><small>Step two</small>shaded to life</p>
+    <p class="stage" data-from=".8" data-to="1.01"><small>Finished</small>your idea, inked.</p>
+    <div class="heroFoot"><div class="wrap">
+      <p><b style="color:#fff">A tattoo collective in Pretoria East.</b> Realism, freehand and fineline by five artists at 714 Jacqueline Drive, Garsfontein.</p>
+      <a class="btn btn-wa" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Book on WhatsApp</a>
+    </div></div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true"><div class="row" id="band"></div></div>
+
+<section class="work" id="work" aria-label="The work">
+  <div class="pin">
+    <div class="wrap head"><h2 class="display h2">The <span class="serif">work</span></h2><p style="max-width:300px;color:#cfc8bf;font-size:15px">Recent pieces from Carl's chair. Keep scrolling.</p></div>
+    <div class="track" id="track">
+      <figure class="piece"><span class="n">01</span><img src="../media/w-freehand.webp" alt="Large black and grey floral tattoo on a thigh, done freehand" loading="lazy"><figcaption><b>Freehand floral</b><span>No stencil</span></figcaption></figure>
+      <figure class="piece"><span class="n">02</span><img src="../media/w-sleeve-start.webp" alt="Close-up of black and grey flower shading on a leg sleeve" loading="lazy"><figcaption><b>Leg sleeve</b><span>Day one</span></figcaption></figure>
+      <figure class="piece"><span class="n">03</span><img src="../media/w-horror.webp" alt="Black and grey realism face, part of a horror sleeve" loading="lazy"><figcaption><b>Horror sleeve</b><span>Realism</span></figcaption></figure>
+      <figure class="piece"><span class="n">04</span><img src="../media/w-sleeve-progress.webp" alt="Leg sleeve in progress with shaded flowers and fresh linework" loading="lazy"><figcaption><b>Sleeve, in progress</b><span>Shading</span></figcaption></figure>
+      <figure class="piece"><span class="n">05</span><img src="../media/w-linework.webp" alt="Fresh floral linework across a hip and thigh" loading="lazy"><figcaption><b>Floral linework</b><span>Hip to thigh</span></figcaption></figure>
+      <figure class="piece"><span class="n">06</span><img src="../media/w-coverup.webp" alt="Carl tattooing over an older piece with gloved hands" loading="lazy"><figcaption><b>Cover-up</b><span>Two days</span></figcaption></figure>
+      <figure class="piece"><span class="n">07</span><img src="../media/w-quick.webp" alt="Black and grey bird illustration tattoo in progress" loading="lazy"><figcaption><b>Quick something</b><span>Black and grey</span></figcaption></figure>
+      <figure class="piece"><span class="n">08</span><img src="../media/w-turbo.webp" alt="Stencil for a turbocharger tattoo" loading="lazy"><figcaption><b>Turbo</b><span>Freehand</span></figcaption></figure>
+    </div>
+    <div class="workBar"><b id="workBar"></b></div>
+  </div>
+</section>
+
+<section class="sketch paper pad-y blot" id="sketch">
+  <div class="wrap grid">
+    <div class="reveal">
+      <span class="kicker">Sketch for fun</span>
+      <h2 class="display h2" style="margin-top:10px">Pick up <span class="serif">the</span> machine</h2>
+      <p class="lead">Draw on the skin with your finger. Your phone buzzes while you ink. Rough is fine; Carl turns ideas into custom pieces.</p>
+    </div>
+    <div class="reveal">
+      <div class="padBox" id="pad"><img class="mach" id="mach" src="../media/machine.webp" alt="" aria-hidden="true"><canvas id="padCanvas" aria-label="Drawing pad that looks like skin; draw your tattoo idea here"></canvas><span class="hint">Touch the skin to start</span></div>
+      <div class="padBtns"><button type="button" class="btn btn-red" id="padSave">Save my sketch</button><button type="button" class="btn btn-line" id="padClear">Clear</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad-y" id="artists">
+  <div class="wrap">
+    <span class="kicker reveal">A collective of creatives</span>
+    <h2 class="display h2 reveal" style="margin-top:10px">Five artists, <span class="serif">one</span> shore</h2>
+    <div class="list">
+      <div class="owner reveal"><img src="../media/carl.webp" alt="Carl Jansen, owner of Tattoo Island" loading="lazy"><div><span class="kicker">Owner · realism · freehand · cover-ups</span><b style="display:block;margin-top:8px">Carl Jansen</b><p>Book a full day and he'll freehand it on the spot.</p><a class="btn btn-line" style="margin-top:14px;min-height:44px" href="https://www.instagram.com/carl_the_creator.2.0/" target="_blank" rel="noopener">@carl_the_creator.2.0</a></div></div>
+      <a class="row reveal" href="https://www.instagram.com/ace_of_spades_tattoo/" target="_blank" rel="noopener"><span class="num">02</span><span><b>Ace of Spades</b><small>@ace_of_spades_tattoo</small></span><svg aria-hidden="true"><use href="#arrow"/></svg></a>
+      <a class="row reveal" href="https://www.instagram.com/inkedby_ryan/" target="_blank" rel="noopener"><span class="num">03</span><span><b>Inked by Ryan</b><small>@inkedby_ryan</small></span><svg aria-hidden="true"><use href="#arrow"/></svg></a>
+      <a class="row reveal" href="https://www.instagram.com/ls.inked/" target="_blank" rel="noopener"><span class="num">04</span><span><b>LS Inked</b><small>@ls.inked</small></span><svg aria-hidden="true"><use href="#arrow"/></svg></a>
+      <a class="row reveal" href="https://www.instagram.com/_october_ink/" target="_blank" rel="noopener"><span class="num">05</span><span><b>October Ink</b><small>@_october_ink</small></span><svg aria-hidden="true"><use href="#arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="pad-y" id="book" style="padding-top:20px">
+  <div class="wrap">
+    <span class="kicker reveal">How to book</span>
+    <h2 class="display h2 reveal" style="margin-top:10px">Three steps <span class="serif">to the</span> chair</h2>
+    <div class="steps">
+      <div class="step reveal"><span class="k">01</span><b>Message Carl</b><p>WhatsApp 073 923 1024 is the fastest. An Instagram DM works too.</p></div>
+      <div class="step reveal"><span class="k">02</span><b>Share your idea</b><p>Placement, size and a reference, or the sketch you drew above.</p></div>
+      <div class="step reveal"><span class="k">03</span><b>Book the session</b><p>A sitting or a full day: small pieces, cover-ups, full sleeves.</p></div>
+    </div>
+    <a class="btn btn-wa reveal" style="margin-top:34px" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp 073 923 1024</a>
+  </div>
+</section>
+
+<section class="visit paper pad-y blot" id="visit">
+  <div class="wrap">
+    <span class="kicker">Now in Pretoria East · by appointment</span>
+    <h2 class="display addr" style="margin-top:10px">714 Jacqueline <span class="serif">Drive</span></h2>
+    <div class="grid">
+      <div class="vlinks">
+        <p style="font-size:18px;color:#3a3633;margin-bottom:10px">Garsfontein, Pretoria, inside STIJL MEN.</p>
+        <a href="https://wa.me/27739231024" target="_blank" rel="noopener">WhatsApp 073 923 1024<svg width="22" height="22" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="https://www.instagram.com/tattoo_island_22/" target="_blank" rel="noopener">@tattoo_island_22<svg width="22" height="22" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=714+Jacqueline+Drive+Garsfontein+Pretoria" target="_blank" rel="noopener">Directions<svg width="22" height="22" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="map"><iframe title="Map to Tattoo Island, 714 Jacqueline Drive, Garsfontein" loading="lazy" src="https://www.google.com/maps?q=714+Jacqueline+Drive,+Garsfontein,+Pretoria&output=embed"></iframe></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <p><b style="color:var(--paper)">Tattoo Island</b> · 714 Jacqueline Drive, Garsfontein, Pretoria</p>
+  <details style="margin-top:6px"><summary>Privacy (POPIA)</summary><p style="margin-top:6px">This site doesn't collect personal information. Sketches stay on your device unless you save or send them yourself. WhatsApp and Instagram links open those services under their own privacy terms.</p></details>
+  <p style="margin-top:6px">Website by <a href="#">NFC Software Solutions</a></p>
+</div></footer>
+
+<div class="bar"><a class="btn btn-wa" href="https://wa.me/27739231024?text=Hi%20Carl!%20I%27d%20like%20to%20book%20a%20tattoo%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Book</a><a class="btn btn-line" href="#work">The work</a></div>
+
+<script>
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const through=el=>{const r=el.getBoundingClientRect(),run=el.offsetHeight-innerHeight;return run>0?clamp(-r.top/run):0;};
+
+// hero film: held on its first frame until you scroll (no flicker on load), then scroll moves it frame by frame
+const hero=document.getElementById('hero'),stick=document.getElementById('stick'),film=document.getElementById('film'),stages=[...hero.querySelectorAll('.stage')];
+film.src=matchMedia('(orientation: portrait)').matches?film.dataset.port:film.dataset.land;
+film.addEventListener('loadedmetadata',()=>{film.currentTime=still?film.duration-.1:0;},{once:true});
+// iOS paints seeked frames only after the video has been started once: start and stop in the same tick, nothing shows
+addEventListener('touchstart',()=>{const t=film.currentTime;const p=film.play();film.pause();if(p&&p.catch)p.catch(()=>{});film.currentTime=t;},{once:true,passive:true});
+let want=0,shown=0;
+const seek=()=>{if(!film.duration||still)return;shown+=(want-shown)*.3;if(Math.abs(want-shown)<.002)shown=want;
+  const t=Math.min(film.duration-.05,shown*film.duration);if(Math.abs(film.currentTime-t)>.03)film.currentTime=t;if(shown!==want)requestAnimationFrame(seek);};
+
+// band of styles: drifts on its own and slides further with scroll
+const band=document.getElementById('band');
+const words='Realism <em>&amp;</em> Freehand <em>&amp;</em> Fineline <em>&amp;</em> Cover-ups <em>&amp;</em> Sleeves <em>&amp;</em> Custom <em>&amp;</em> ';
+band.innerHTML=('<span>'+words+'</span>').repeat(4);
+
+// work: vertical scroll drives the gallery sideways (spatial browsing)
+const work=document.getElementById('work'),track=document.getElementById('track'),wbar=document.getElementById('workBar');
+const sizeWork=()=>{const extra=Math.max(0,track.scrollWidth-innerWidth);work.style.setProperty('--len',(innerHeight+extra)+'px');};
+sizeWork();addEventListener('resize',sizeWork);addEventListener('load',sizeWork);
+
+// light sections open like ink spreading from the top edge
+const blots=[...document.querySelectorAll('.blot')];
+
+let drift=0,last=performance.now();
+function frame(now){
+  const dt=Math.min(.05,(now-last)/1000);last=now;
+  // hero
+  const p=through(hero);want=p;requestAnimationFrame(seek);
+  stick.style.setProperty('--fill',(clamp(p/.9)*100).toFixed(1)+'%');
+  stages.forEach(s=>s.classList.toggle('on',p>=+s.dataset.from&&p<+s.dataset.to));
+  // band
+  if(!still){drift+=dt*40;const w=band.firstChild.offsetWidth;band.style.transform=`translateX(${-((drift+scrollY*.5)%w)}px)`;}
+  // work
+  const wp=through(work);track.style.transform=`translateX(${-wp*Math.max(0,track.scrollWidth-innerWidth)}px)`;wbar.style.width=wp*100+'%';
+  // blots
+  blots.forEach(b=>{const r=b.getBoundingClientRect();const k=still?1:clamp((innerHeight-r.top)/(innerHeight*.75));b.style.setProperty('--r',(k*150).toFixed(1)+'%');});
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+
+// sketch for fun: a real coil machine under your finger, the phone buzzes while it's down
+{const pad=document.getElementById('pad'),cv=document.getElementById('padCanvas'),g=cv.getContext('2d'),mach=document.getElementById('mach');
+ const skin=()=>{const r=pad.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);cv.width=r.width*d;cv.height=r.height*d;g.setTransform(d,0,0,d,0,0);
+   const gr=g.createRadialGradient(r.width*.45,r.height*.4,10,r.width*.5,r.height*.5,r.width*.75);gr.addColorStop(0,'#e7c3a6');gr.addColorStop(1,'#c99a7c');g.fillStyle=gr;g.fillRect(0,0,r.width,r.height);
+   for(let i=0;i<1600;i++){g.fillStyle=`rgba(120,70,45,${Math.random()*.06})`;g.fillRect(Math.random()*r.width,Math.random()*r.height,1.2,1.2);}};
+ skin();let last=null;
+ const pt=e=>{const r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top];};
+ // needle tip of the photo (12,1000 of 966x1012) shown 110px wide = 1.4,113.8
+ const place=([x,y])=>{mach.style.transform=`translate(${x-1.4}px,${y-113.8}px) rotate(8deg)`;};
+ const hap=document.createElement('label');hap.setAttribute('aria-hidden','true');hap.style.cssText='position:fixed;left:-99px;top:0;opacity:0;pointer-events:none';hap.innerHTML='<input type="checkbox" switch tabindex="-1">';document.body.appendChild(hap);
+ const canVibe=typeof navigator.vibrate==='function',pattern=Array.from({length:60},(_,i)=>i%2?6:24);let buzzT=0,tickT=0;
+ const buzzOn=()=>{if(canVibe){navigator.vibrate(pattern);clearInterval(buzzT);buzzT=setInterval(()=>navigator.vibrate(pattern),1400);}else{hap.click();clearInterval(tickT);tickT=setInterval(()=>hap.click(),90);}};
+ const buzzOff=()=>{clearInterval(buzzT);clearInterval(tickT);if(canVibe)navigator.vibrate(0);};
+ cv.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')pad.classList.add('hover');place(pt(e));});
+ cv.addEventListener('pointerleave',()=>pad.classList.remove('hover'));
+ cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);last=pt(e);place(last);pad.classList.add('used','inking');buzzOn();});
+ cv.addEventListener('pointermove',e=>{const p=pt(e);place(p);if(!last)return;const j=()=>(Math.random()-.5)*.7;
+   g.strokeStyle='rgba(18,16,20,.93)';g.lineCap=g.lineJoin='round';g.lineWidth=2.8+Math.random()*.8;g.shadowColor='rgba(20,20,40,.35)';g.shadowBlur=2;
+   g.beginPath();g.moveTo(last[0],last[1]);g.lineTo(p[0]+j(),p[1]+j());g.stroke();last=p;});
+ const up=()=>{last=null;pad.classList.remove('inking');buzzOff();};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+ document.getElementById('padClear').onclick=()=>{skin();pad.classList.remove('used');};
+ document.getElementById('padSave').onclick=()=>cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-tattoo-sketch.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000);});
+ let w=pad.clientWidth;addEventListener('resize',()=>{if(Math.abs(pad.clientWidth-w)>40){w=pad.clientWidth;skin();pad.classList.remove('used');}});}
+</script>
+</body>
+</html>
